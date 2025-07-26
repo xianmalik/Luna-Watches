@@ -10,6 +10,7 @@ export default function Home() {
           description: "Trova Tutte le informationi sui nostri prodotti, le offerte e le novità",
           button: {
             text: "Explore The Collections",
+            responsiveText: "Explore",
             url: "/collections"
           }
         },
@@ -19,6 +20,7 @@ export default function Home() {
           description: "Trova Tutte le informationi sui nostri prodotti, le offerte e le novità",
           button: {
             text: "Explore The Collections",
+            responsiveText: "Explore",
             url: "/collections"
           }
         },
@@ -28,6 +30,7 @@ export default function Home() {
           description: "Trova Tutte le informationi sui nostri prodotti, le offerte e le novità",
           button: {
             text: "Explore The Collections",
+            responsiveText: "Explore",
             url: "/collections"
           }
         },
