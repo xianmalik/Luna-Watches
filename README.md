@@ -16,3 +16,14 @@
 </p>
 
 <hr />
+
+<p align="center">
+	<h2 align="center">Powered By</h2>
+</p>
+
+<ul>
+	<li><a href="https://nextjs.org/">NextJS</a></li>
+	<li><a href="https://shopify.com/">Shopify</a></li>
+	<li><a href="https://ui.shadcn.com/">shadcn/ui</a></li>
+	<li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
+</ul>

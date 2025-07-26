@@ -124,3 +124,12 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+/* navigation styles */
+.le-navbar--item a {
+  @apply font-semibold text-secondary-foreground uppercase;
+  @apply px-2 py-1 border-b-2 border-transparent;
+  @apply hover:border-gray-600;
+  @apply transition-colors duration-200 ease-in-out;
+}
