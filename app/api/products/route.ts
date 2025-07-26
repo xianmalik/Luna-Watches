@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 import { shopifyFetch } from "@/lib/shopify";
 
 interface ProductImage {
@@ -20,10 +20,7 @@ interface ShopifyResponse {
     };
 }
 
-export default async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse
-) {
+export async function GET() {
     const query = `
         {
             products(first: 10) {
@@ -47,8 +44,11 @@ export default async function handler(
 
     try {
         const data: ShopifyResponse = await shopifyFetch(query);
-        res.status(200).json(data.products.edges.map(edge => edge.node));
+        return NextResponse.json(data.products.edges.map(edge => edge.node));
     } catch (err: unknown) {
-        res.status(500).json({ error: err instanceof Error ? err.message : 'An unknown error occurred' });
+        return NextResponse.json(
+            { error: err instanceof Error ? err.message : 'An unknown error occurred' },
+            { status: 500 }
+        );
     }
 }
