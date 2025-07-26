@@ -48,7 +48,7 @@ export default async function handler(
     try {
         const data: ShopifyResponse = await shopifyFetch(query);
         res.status(200).json(data.products.edges.map(edge => edge.node));
-    } catch (err: any) {
-        res.status(500).json({ error: err.message });
+    } catch (err: unknown) {
+        res.status(500).json({ error: err instanceof Error ? err.message : 'An unknown error occurred' });
     }
 }
