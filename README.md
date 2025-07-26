@@ -22,8 +22,8 @@
 </p>
 
 <ul>
-	<li><a href="https://nextjs.org/">NextJS</a></li>
-	<li><a href="https://shopify.com/">Shopify</a></li>
-	<li><a href="https://ui.shadcn.com/">shadcn/ui</a></li>
-	<li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
+	<a href="https://nextjs.org/"><img src="https://img.shields.io/badge/next.js-000?style=for-the-badge&logo=nextdotjs&logoColor=white" /></a>
+	<a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-000?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC"/></a>
+	<a href="https://ui.shadcn.com/"><img src="https://img.shields.io/badge/shadcn%2Fui-000?logo=shadcnui&logoColor=fff&style=for-the-badge"/></a>
+	<a href="https://shopify.com/"><img src="https://img.shields.io/badge/Shopify-000?logo=shopify&logoColor=7AB55C&style=for-the-badge" /></a>
 </ul>
