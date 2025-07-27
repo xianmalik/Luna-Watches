@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { HamburgerIcon, MenuIcon, MoonIcon, ShoppingCart, User } from "lucide-react";
+import { MenuIcon, ShoppingCart, User } from "lucide-react";
 
 // sub components
 import SearchBar from "@/components/common/navigation/SearchBar";

@@ -2,7 +2,7 @@ const domain = process.env.SHOPIFY_STORE_DOMAIN!;
 const storefrontAccessToken = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN!;
 
 export async function shopifyFetch(query: string, variables = {}) {
-  const endpoint = `https://${domain}/api/2023-04/graphql.json`;
+  const endpoint = `https://${domain}/api/${new Date().getFullYear()}-${new Date().getMonth() + 1}/graphql.json`;
 
   const res = await fetch(endpoint, {
     method: 'POST',
