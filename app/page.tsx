@@ -1,40 +1,18 @@
+import { Fragment } from "react";
+
+// Homepage Blocks
 import HeroSlider from "@/blocks/HeroSlider";
+import ProductGrid from "@/blocks/ProductGrid";
+
+// Content JSON
+import content from "@/content/home.json";
+import products from "@/content/products.json";
 
 export default function Home() {
   return (
-    <HeroSlider
-      slides={[
-        {
-          image: "/assets/images/slider-image-1.png",
-          title: "LUXURY WATCHES",
-          description: "Trova Tutte le informationi sui nostri prodotti, le offerte e le novità",
-          button: {
-            text: "Explore The Collections",
-            responsiveText: "Explore",
-            url: "/collections"
-          }
-        },
-        {
-          image: "/assets/images/slider-image-1.png",
-          title: "LUXURY WATCHES",
-          description: "Trova Tutte le informationi sui nostri prodotti, le offerte e le novità",
-          button: {
-            text: "Explore The Collections",
-            responsiveText: "Explore",
-            url: "/collections"
-          }
-        },
-        {
-          image: "/assets/images/slider-image-1.png",
-          title: "LUXURY WATCHES",
-          description: "Trova Tutte le informationi sui nostri prodotti, le offerte e le novità",
-          button: {
-            text: "Explore The Collections",
-            responsiveText: "Explore",
-            url: "/collections"
-          }
-        },
-      ]}
-    />
+    <Fragment>
+      <HeroSlider slides={content.slides} />
+      <ProductGrid title={"New Arrival"} products={products.filter(product => product.isNewArrival)} />
+    </Fragment>
   );
 }

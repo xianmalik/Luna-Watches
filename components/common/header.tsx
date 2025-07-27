@@ -4,7 +4,8 @@ import { MenuIcon, ShoppingCart, User } from "lucide-react";
 // sub components
 import SearchBar from "@/components/common/navigation/SearchBar";
 
-import { NAVBAR_PRIMARY_ITEMS } from "@/lib/app.settings";
+// Contents
+import nav from "@/content/nav-primary.json";
 
 export default function Header() {
     return (
@@ -34,7 +35,7 @@ export default function Header() {
             {/* Navigation Menu */}
             <nav className="container mx-auto hidden md:block mt-4">
                 <ul className="flex space-x-4">
-                    {NAVBAR_PRIMARY_ITEMS.map((item) => (
+                    {nav.map((item) => (
                         <li className="le-navbar--item" key={item.href}>
                             <Link href={item.href}>{item.label}</Link>
                         </li>

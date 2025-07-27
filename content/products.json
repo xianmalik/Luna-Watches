@@ -1,0 +1,263 @@
+[
+    {
+        "id": 1,
+        "slug": "rolex-submariner",
+        "name": "Submariner",
+        "description": "A premium luxury watch with exquisite design.",
+        "shortDescription": "Iconic diving watch from Rolex",
+        "brand": {
+            "id": "rolex",
+            "name": "Rolex",
+            "logoUrl": null
+        },
+        "sku": "ROL-SUB-001",
+        "price": {
+            "original": 19999,
+            "current": 19999,
+            "currency": "USD"
+        },
+        "isFeatured": false,
+        "isPreOwned": true,
+        "isNewArrival": true,
+        "featuredImage": {
+            "url": "/assets/images/product-image-1.png",
+            "alt": "Rolex Submariner Watch",
+            "isPrimary": true
+        },
+        "images": [
+            {
+                "url": "/assets/images/product-image-1.png",
+                "alt": "Rolex Submariner Watch",
+                "isPrimary": true
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "slug": "patek-philippe-nautilus",
+        "name": "Nautilus",
+        "description": "A premium luxury watch with exquisite design.",
+        "shortDescription": "Iconic sports luxury timepiece",
+        "brand": {
+            "id": "patek-philippe",
+            "name": "PATEK PHILIPPE",
+            "logoUrl": null
+        },
+        "sku": "PP-NAU-001",
+        "price": {
+            "original": 24999,
+            "current": 24999,
+            "currency": "USD"
+        },
+        "stock": {
+            "quantity": 3,
+            "inStock": true,
+            "lowStockThreshold": 1
+        },
+        "isFeatured": false,
+        "isPreOwned": false,
+        "isNewArrival": true,
+        "isBestSeller": true,
+        "condition": "new",
+        "warranty": "International Warranty",
+        "categories": [
+            {
+                "id": "luxury-watches",
+                "name": "Luxury Watches",
+                "slug": "luxury-watches",
+                "parentId": null
+            }
+        ],
+        "tags": ["luxury", "sports", "swiss-made"],
+        "featuredImage": {
+            "url": "/assets/images/product-image-2.png",
+            "alt": "Patek Philippe Nautilus Watch",
+            "isPrimary": true
+        },
+        "images": [
+            {
+                "url": "/assets/images/product-image-2.png",
+                "alt": "Patek Philippe Nautilus Watch",
+                "isPrimary": true
+            }
+        ],
+        "shipping": {
+            "weight": 0.4,
+            "dimensions": {
+                "length": 15,
+                "width": 15,
+                "height": 10
+            },
+            "freeShipping": true,
+            "estimatedDeliveryDays": 3
+        },
+        "ratings": {
+            "average": 4.9,
+            "count": 86
+        },
+        "reviewsCount": 86,
+        "seo": {
+            "title": "Patek Philippe Nautilus - Luxury Sports Watch",
+            "description": "Experience the legendary Patek Philippe Nautilus, a perfect blend of sport and luxury.",
+            "keywords": ["patek philippe", "nautilus", "luxury watch", "sports watch"]
+        },
+        "status": "active",
+        "visibility": "public",
+        "createdAt": "2025-01-02T00:00:00Z",
+        "updatedAt": "2025-07-27T00:00:00Z"
+    },
+    {
+        "id": 3,
+        "slug": "rolex-daytona",
+        "name": "Daytona",
+        "description": "A premium luxury watch with exquisite design.",
+        "shortDescription": "Legendary chronograph timepiece",
+        "brand": {
+            "id": "rolex",
+            "name": "Rolex",
+            "logoUrl": null
+        },
+        "sku": "ROL-DAY-001",
+        "price": {
+            "original": 29999,
+            "current": 29999,
+            "currency": "USD"
+        },
+        "stock": {
+            "quantity": 2,
+            "inStock": true,
+            "lowStockThreshold": 1
+        },
+        "isFeatured": true,
+        "isPreOwned": false,
+        "isNewArrival": true,
+        "isBestSeller": true,
+        "condition": "new",
+        "warranty": "5 years international warranty",
+        "categories": [
+            {
+                "id": "luxury-watches",
+                "name": "Luxury Watches",
+                "slug": "luxury-watches",
+                "parentId": null
+            },
+            {
+                "id": "chronograph",
+                "name": "Chronograph",
+                "slug": "chronograph",
+                "parentId": "luxury-watches"
+            }
+        ],
+        "featuredImage": {
+            "url": "/assets/images/product-image-3.png",
+            "alt": "Rolex Daytona Watch",
+            "isPrimary": true
+        },
+        "images": [
+            {
+                "url": "/assets/images/product-image-3.png",
+                "alt": "Rolex Daytona Watch",
+                "isPrimary": true
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "slug": "omega-speedmaster",
+        "name": "Speedmaster",
+        "description": "A premium luxury watch with exquisite design.",
+        "shortDescription": "Iconic space watch from Omega",
+        "brand": {
+            "id": "omega",
+            "name": "Omega",
+            "logoUrl": null
+        },
+        "sku": "OME-SPE-001",
+        "price": {
+            "original": 4999,
+            "current": 4999,
+            "currency": "USD"
+        },
+        "stock": {
+            "quantity": 10,
+            "inStock": true,
+            "lowStockThreshold": 3
+        },
+        "isFeatured": false,
+        "isPreOwned": false,
+        "isNewArrival": false,
+        "isBestSeller": false,
+        "condition": "new",
+        "warranty": "2 years international warranty",
+        "categories": [
+            {
+                "id": "luxury-watches",
+                "name": "Luxury Watches",
+                "slug": "luxury-watches",
+                "parentId": null
+            },
+            {
+                "id": "space-watches",
+                "name": "Space Watches",
+                "slug": "space-watches",
+                "parentId": null
+            }
+        ],
+        "tags": ["space", "luxury", "swiss-made"],
+        "featuredImage": {
+            "url": "/assets/images/product-image-4.png",
+            "alt": "Omega Speedmaster Watch",
+            "isPrimary": true
+        },
+        "images": [
+            {
+                "url": "/assets/images/product-image-4.png",
+                "alt": "Omega Speedmaster Watch",
+                "isPrimary": true
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "slug": "tag-heuer-monaco",
+        "name": "Monaco",
+        "description": "A premium luxury watch with exquisite design.",
+        "shortDescription": "Iconic square chronograph watch",
+        "brand": {
+            "id": "tag-heuer",
+            "name": "TAG Heuer",
+            "logoUrl": null
+        },
+        "sku": "TAG-MON-001",
+        "price": {
+            "original": 3999,
+            "current": 3999,
+            "currency": "USD"
+        },
+        "stock": {
+            "quantity": 8,
+            "inStock": true,
+            "lowStockThreshold": 2
+        },
+        "isFeatured": false,
+        "isPreOwned": false,
+        "isNewArrival": false,
+        "isBestSeller": false,
+        "condition": "new",
+        "warranty": "2 years international warranty",
+        "categories": [
+            {
+                "id": "luxury-watches",
+                "name": "Luxury Watches",
+                "slug": "luxury-watches",
+                "parentId": null
+            },
+            {
+                "id": "chronograph",
+                "name": "Chronograph",
+                "slug": "chronograph",
+                "parentId": null
+            }
+        ]
+    }
+]

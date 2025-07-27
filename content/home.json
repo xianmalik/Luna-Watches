@@ -1,0 +1,34 @@
+{
+    "slides": [
+        {
+            "image": "/assets/images/slider-image-1.png",
+            "title": "LUXURY WATCHES",
+            "description": "Trova Tutte le informationi sui nostri prodotti, le offerte e le novità",
+            "button": {
+                "text": "Explore The Collections",
+                "responsiveText": "Explore",
+                "url": "/collections"
+            }
+        },
+        {
+            "image": "/assets/images/slider-image-1.png",
+            "title": "LUXURY WATCHES",
+            "description": "Trova Tutte le informationi sui nostri prodotti, le offerte e le novità",
+            "button": {
+                "text": "Explore The Collections",
+                "responsiveText": "Explore",
+                "url": "/collections"
+            }
+        },
+        {
+            "image": "/assets/images/slider-image-1.png",
+            "title": "LUXURY WATCHES",
+            "description": "Trova Tutte le informationi sui nostri prodotti, le offerte e le novità",
+            "button": {
+                "text": "Explore The Collections",
+                "responsiveText": "Explore",
+                "url": "/collections"
+            }
+        }
+    ]
+}
