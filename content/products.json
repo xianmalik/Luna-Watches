@@ -185,7 +185,7 @@
         },
         "isFeatured": false,
         "isPreOwned": false,
-        "isNewArrival": false,
+        "isNewArrival": true,
         "isBestSeller": false,
         "condition": "new",
         "warranty": "2 years international warranty",
@@ -241,7 +241,7 @@
         },
         "isFeatured": false,
         "isPreOwned": false,
-        "isNewArrival": false,
+        "isNewArrival": true,
         "isBestSeller": false,
         "condition": "new",
         "warranty": "2 years international warranty",
@@ -257,6 +257,18 @@
                 "name": "Chronograph",
                 "slug": "chronograph",
                 "parentId": null
+            }
+        ],
+        "featuredImage": {
+            "url": "/assets/images/product-image-5.png",
+            "alt": "Omega Speedmaster Watch",
+            "isPrimary": true
+        },
+        "images": [
+            {
+                "url": "/assets/images/product-image-5.png",
+                "alt": "Omega Speedmaster Watch",
+                "isPrimary": true
             }
         ]
     }

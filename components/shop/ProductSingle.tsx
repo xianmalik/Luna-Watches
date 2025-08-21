@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 import { Product } from "@/types/Product";
+import { PlusIcon, ShoppingCartIcon } from "lucide-react";
 
 export default function ProductSingle({ product }: { product: Product }) {
     return (
@@ -18,21 +19,24 @@ export default function ProductSingle({ product }: { product: Product }) {
                     <Badge>Pre-Owned</Badge>
                 )}
             </div>
-            <AspectRatio ratio={2 / 2.5} className="mb-4">
-                <Image src={product.featuredImage.url} alt={product.featuredImage.alt || product.name} height={500} width={400} className="h-full w-full object-contain rounded" loading="lazy" />
-            </AspectRatio>
+            {product.featuredImage && (
+                <AspectRatio ratio={2 / 2.5} className="mb-4">
+                    <Image src={product.featuredImage.url} alt={product.featuredImage.alt || product.name} height={500} width={400} className="h-full w-full object-contain rounded" loading="lazy" />
+                </AspectRatio>
+            )}
             {product.name && (
-                <h3 className="text-lg font-semibold">{product.name}</h3>
+                <h3 className="text-lg md:text-xl font-semibold">{product.name}</h3>
             )}
             {product.description && (
-                <p className="text-gray-600">{product.description}</p>
+                <p className="text-gray-500 text-sm md:text-base leading-6">{product.description}</p>
             )}
             {product.price && (
                 <span className="block mt-2 font-bold">
                     {product.price.current.toLocaleString()} {product.price.currency}
                 </span>
             )}
-            <Button className="mt-4" variant="secondary" size="sm">
+            <Button className="mt-4 uppercase tracking-wide text-xs font-semibold" variant="secondary" size="sm">
+                <PlusIcon className="size-4" />
                 Add to cart
             </Button>
         </Link>
