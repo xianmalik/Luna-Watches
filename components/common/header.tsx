@@ -18,7 +18,7 @@ export default function Header() {
 
                 {/* Logo */}
                 <Link href="/" className="text-2xl font-medium uppercase flex items-center justify-center md:justify-start gap-2 col-span-3 md:col-span-1">
-                    {"Luna Watches"}
+                    {"Luna Store"}
                 </Link>
 
                 {/* Right Icons */}

@@ -11,11 +11,11 @@ export default function Footer() {
                     <div>
                         <h3 className="text-lg font-semibold tracking-wide mb-4">EXPLORE</h3>
                         <ul className="text-sm space-y-1">
-                            <li><Link href="/watches">All Watches</Link></li>
-                            <li><Link href="/journal">Collector&apos;s Journal</Link></li>
+                            <li><Link href="/products">All Products</Link></li>
+                            <li><Link href="/blog">Blog</Link></li>
                             <li><Link href="/collections">Collections</Link></li>
                             <li><Link href="/guides">Buying Guides</Link></li>
-                            <li><Link href="/reviews">Watch Reviews</Link></li>
+                            <li><Link href="/reviews">Reviews</Link></li>
                         </ul>
                     </div>
 
@@ -23,8 +23,8 @@ export default function Footer() {
                     <div>
                         <h3 className="text-lg font-semibold tracking-wide mb-4">SERVICE</h3>
                         <ul className="text-sm space-y-1">
-                            <li><Link href="/sell">Sell Your Watch</Link></li>
-                            <li><Link href="/trade">Trade Your Watch</Link></li>
+                            <li><Link href="/sell">Sell With Us</Link></li>
+                            <li><Link href="/trade">Trade-In</Link></li>
                             <li><Link href="/care">Extend Care</Link></li>
                             <li><Link href="/repairs">Warranties and Repairs</Link></li>
                             <li><Link href="/faq">FAQs</Link></li>
@@ -71,7 +71,7 @@ export default function Footer() {
                 </div>
                 
                 <div className="mt-12 pt-8 border-t border-gray-300 text-center text-sm">
-                    <p>Copyright {new Date().getFullYear()} Luna Watches | All Rights Reserved</p>
+                    <p>Copyright {new Date().getFullYear()} Luna Store | All Rights Reserved</p>
                 </div>
             </div>
         </footer>

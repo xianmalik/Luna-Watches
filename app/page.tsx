@@ -16,8 +16,8 @@ export default async function Home() {
         slides={[
           {
             image: "/assets/images/slider-image-1.png",
-            title: "LUXURY WATCHES",
-            description: "Trova Tutte le informationi sui nostri prodotti, le offerte e le novità",
+            title: "DISCOVER MORE",
+            description: "Explore our curated collection of products, deals, and new arrivals",
             button: {
               text: "Explore The Collections",
               responsiveText: "Explore",
@@ -26,8 +26,8 @@ export default async function Home() {
           },
           {
             image: "/assets/images/slider-image-1.png",
-            title: "LUXURY WATCHES",
-            description: "Trova Tutte le informationi sui nostri prodotti, le offerte e le novità",
+            title: "DISCOVER MORE",
+            description: "Explore our curated collection of products, deals, and new arrivals",
             button: {
               text: "Explore The Collections",
               responsiveText: "Explore",
@@ -36,8 +36,8 @@ export default async function Home() {
           },
           {
             image: "/assets/images/slider-image-1.png",
-            title: "LUXURY WATCHES",
-            description: "Trova Tutte le informationi sui nostri prodotti, le offerte e le novità",
+            title: "DISCOVER MORE",
+            description: "Explore our curated collection of products, deals, and new arrivals",
             button: {
               text: "Explore The Collections",
               responsiveText: "Explore",
@@ -49,50 +49,50 @@ export default async function Home() {
       <BrandsGrid
         title="Popular Brands"
         brands={[
-          "ROLEX",
-          "Patek Philippe",
-          "Breitling",
-          "Omega",
-          "Audemars Piguet",
-          "Tudor",
-          "CARTIER",
-          "IWC",
-          "PANERAI",
-          "SEIKO",
+          "Nike",
+          "Apple",
+          "Samsung",
+          "Sony",
+          "Adidas",
+          "Dyson",
+          "Bose",
+          "Lego",
+          "New Balance",
+          "The North Face",
         ]}
        />
       <CollectionsGrid
         title="Collections"
         collections={[
           {
-            title: "Rolex",
-            image: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=600&h=600&fit=crop",
-            href: "/collections/rolex",
+            title: "Electronics",
+            image: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600&h=600&fit=crop",
+            href: "/collections/electronics",
           },
           {
-            title: "Complications",
-            image: "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?w=600&h=600&fit=crop",
-            href: "/collections/complications",
+            title: "Home & Living",
+            image: "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=600&h=600&fit=crop",
+            href: "/collections/home-living",
           },
           {
-            title: "Men\u2019s Collections",
-            image: "https://images.unsplash.com/photo-1622434641406-a158123450f9?w=600&h=600&fit=crop",
+            title: "Men\u2019s",
+            image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?w=600&h=600&fit=crop",
             href: "/collections/mens",
           },
           {
-            title: "Audemars Piguet",
-            image: "https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?w=600&h=600&fit=crop",
-            href: "/collections/audemars-piguet",
-          },
-          {
-            title: "Rare to Find",
-            image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600&h=600&fit=crop",
-            href: "/collections/rare",
-          },
-          {
-            title: "Women\u2019s Collection",
-            image: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?w=600&h=600&fit=crop",
+            title: "Women\u2019s",
+            image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&h=600&fit=crop",
             href: "/collections/womens",
+          },
+          {
+            title: "Trending",
+            image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=600&fit=crop",
+            href: "/collections/trending",
+          },
+          {
+            title: "Sale",
+            image: "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=600&h=600&fit=crop",
+            href: "/collections/sale",
           },
         ]}
       />
@@ -101,7 +101,7 @@ export default async function Home() {
         products={products}
         />
       <FeaturesGrid
-        title="Swiss Luxury Watches Since 2000"
+        title="Trusted Online Shopping Since 2000"
         features={[
           {
             icon: "/assets/illustrations/buyer-rating.svg",
@@ -109,9 +109,9 @@ export default async function Home() {
             lines: ["From 136,000", "Reviews Worldwide"],
           },
           {
-            icon: "/assets/illustrations/watch-love.svg",
+            icon: "/assets/illustrations/love-shopping.svg",
             headline: "9 Million",
-            lines: ["Watch Enthusiasts", "Use Chrono24 Each Month"],
+            lines: ["Happy Customers", "Shop With Us Each Month"],
           },
           {
             icon: "/assets/illustrations/customers.svg",

@@ -11,8 +11,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Luna Watches",
-  description: "Luxury watches for the modern era",
+  title: "Luna Store",
+  description: "Your destination for quality products at great prices",
 };
 
 export default function RootLayout({

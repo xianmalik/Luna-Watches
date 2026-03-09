@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Luna Watches is a luxury watch e-commerce website template built with Next.js 15, using DummyJSON as the product and cart data source. The project uses shadcn/ui components (New York style) built on Radix UI primitives, styled with Tailwind CSS v4, and managed with Bun as the package manager.
+Luna Store is a general e-commerce website template built with Next.js 15, using DummyJSON as the product and cart data source. The project uses shadcn/ui components (New York style) built on Radix UI primitives, styled with Tailwind CSS v4, and managed with Bun as the package manager.
 
 ## Development Commands
 
