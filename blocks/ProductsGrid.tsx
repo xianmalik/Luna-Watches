@@ -1,19 +1,5 @@
 import ProductCard from "@/components/products/ProductCard";
-
-interface Product {
-    image: {
-        url: string;
-        alt: string;
-    };
-    name: string;
-    slug: string;
-    brand: string;
-    price: {
-        original: number;
-        sale?: number;
-    };
-    badge?: string;
-}
+import type { Product } from "@/types/products";
 
 interface ProductsGridProps {
     title?: string;
@@ -27,15 +13,10 @@ export default function ProductsGrid({ title, products }: ProductsGridProps) {
                 {title ?? "New Arrivals"}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                {products?.map((product, index) => (
+                {products?.map((product) => (
                     <ProductCard
-                        key={product.slug ?? index}
-                        image={product.image}
-                        name={product.name}
-                        slug={product.slug}
-                        brand={product.brand}
-                        price={product.price}
-                        badge={product.badge}
+                        key={product.id}
+                        product={product}
                     />
                 ))}
             </div>

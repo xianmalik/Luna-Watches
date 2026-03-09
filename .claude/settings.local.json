@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "WebSearch",
-      "Bash(npx shadcn@latest add:*)"
+      "Bash(npx shadcn@latest add:*)",
+      "WebFetch(domain:dummyjson.com)",
+      "Bash(export PATH=\"$HOME/.bun/bin:$PATH\")",
+      "Bash(bun run build:*)",
+      "Bash(npx tsc:*)"
     ],
     "deny": [],
     "ask": []

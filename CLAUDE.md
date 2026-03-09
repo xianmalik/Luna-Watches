@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Luna Watches is a luxury watch e-commerce website template built with Next.js 15, integrating with Shopify's Storefront API for product data. The project uses shadcn/ui components (New York style) built on Radix UI primitives, styled with Tailwind CSS v4, and managed with Bun as the package manager.
+Luna Watches is a luxury watch e-commerce website template built with Next.js 15, using DummyJSON as the product and cart data source. The project uses shadcn/ui components (New York style) built on Radix UI primitives, styled with Tailwind CSS v4, and managed with Bun as the package manager.
 
 ## Development Commands
 
@@ -32,20 +32,31 @@ bun run lint
 - `app/` - Next.js 15 App Router pages and API routes
   - `app/page.tsx` - Homepage with hero slider
   - `app/layout.tsx` - Root layout with Header/Footer and Poppins font
-  - `app/api/products/route.ts` - API endpoint for fetching Shopify products
-- `blocks/` - Page-level composite components (e.g., HeroSlider)
+  - `app/api/products/` - API routes wrapping DummyJSON product endpoints
+  - `app/api/cart/` - API routes wrapping DummyJSON cart endpoints
+- `blocks/` - Page-level composite components (e.g., HeroSlider, ProductsGrid)
 - `components/` - Reusable React components
   - `components/ui/` - shadcn/ui primitives (button, badge, carousel, input, navigation-menu)
   - `components/common/` - Shared application components (header, footer, SearchBar)
+  - `components/products/` - Product-specific components (ProductCard)
 - `lib/` - Utility functions and configuration
-  - `lib/shopify.ts` - Shopify Storefront API client
+  - `lib/dummyjson.ts` - Server-side DummyJSON API fetch utility
+  - `lib/api-client.ts` - Frontend API client for calling internal API routes
   - `lib/app.settings.ts` - Application settings (navigation items, etc.)
   - `lib/utils.ts` - Utility functions (includes cn() for class merging)
+- `types/` - TypeScript type definitions
+  - `types/products.ts` - Product and category types (matches DummyJSON schema)
+  - `types/cart.ts` - Cart types (matches DummyJSON schema)
+- `services/` - Frontend service functions
+  - `services/products.ts` - Product API service (uses apiClient)
+  - `services/cart.ts` - Cart API service (uses apiClient)
 - `public/` - Static assets (images, fonts, etc.)
 
 ### Key Architectural Patterns
 
-**Shopify Integration**: The app uses Shopify's Storefront API (GraphQL) through a custom client in `lib/shopify.ts`. The `shopifyFetch()` function dynamically constructs the API endpoint using the current year and month (e.g., `/api/2025-12/graphql.json`). Products are fetched via the `/api/products` route handler.
+**DummyJSON Integration**: The app uses DummyJSON (https://dummyjson.com) as its data source. Server-side API routes in `app/api/` act as wrappers around DummyJSON endpoints. The server-side fetch utility is in `lib/dummyjson.ts`. Frontend components call our internal API routes via `lib/api-client.ts` and the service functions in `services/`.
+
+**API Route Pattern**: Each API route in `app/api/` is a thin wrapper that forwards requests to DummyJSON server-side. This keeps the external API URL hidden from the client and allows future middleware (auth, caching, transformation).
 
 **Component Organization**:
 - `blocks/` contains large, page-specific components (e.g., HeroSlider)
@@ -56,9 +67,21 @@ bun run lint
 
 **Path Aliases**: `@/*` maps to the root directory (configured in `tsconfig.json`)
 
-**Environment Variables**: Required variables are documented in `.env.example`:
-- `SHOPIFY_STORE_DOMAIN` - Your Shopify store domain (e.g., `your-store.myshopify.com`)
-- `SHOPIFY_STOREFRONT_ACCESS_TOKEN` - Shopify Storefront API access token
+## API Routes
+
+### Products
+- `GET /api/products` - List products (query: `limit`, `skip`, `select`)
+- `GET /api/products/[id]` - Get single product
+- `GET /api/products/search` - Search products (query: `q`)
+- `GET /api/products/categories` - List all categories
+- `GET /api/products/category/[category]` - Get products by category
+
+### Cart
+- `GET /api/cart` - Get all carts (query: `userId` for user-specific)
+- `POST /api/cart` - Create a new cart
+- `GET /api/cart/[id]` - Get a single cart
+- `PUT /api/cart/[id]` - Update a cart
+- `DELETE /api/cart/[id]` - Delete a cart
 
 ## shadcn/ui Components
 
@@ -81,7 +104,7 @@ Primary navigation items are centrally configured in `lib/app.settings.ts` using
 
 ## Next.js Configuration
 
-- Images from `images.unsplash.com` are whitelisted in `next.config.ts`
+- Images from `images.unsplash.com`, `placehold.co`, and `cdn.dummyjson.com` are whitelisted in `next.config.ts`
 - React Strict Mode is enabled
 - Development server uses Turbopack (Next.js 15 feature)
 
