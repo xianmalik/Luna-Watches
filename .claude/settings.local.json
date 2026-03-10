@@ -6,7 +6,9 @@
       "WebFetch(domain:dummyjson.com)",
       "Bash(export PATH=\"$HOME/.bun/bin:$PATH\")",
       "Bash(bun run build:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(find:*)",
+      "Bash(export PATH=\"$HOME/.bun/bin:$HOME/.nvm/versions/node/v23.7.0/bin:$PATH\")"
     ],
     "deny": [],
     "ask": []
