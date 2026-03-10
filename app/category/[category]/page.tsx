@@ -49,8 +49,8 @@ export default async function CategoryPage({ params }: PageProps) {
             Home
           </Link>
           {" / "}
-          <Link href="/products" className="hover:text-black transition-colors">
-            Products
+          <Link href="/category" className="hover:text-black transition-colors">
+            Categories
           </Link>
           {" / "}
           <span className="text-black">{category}</span>
@@ -106,8 +106,8 @@ export default async function CategoryPage({ params }: PageProps) {
           Home
         </Link>
         {" / "}
-        <Link href="/products" className="hover:text-black transition-colors">
-          Products
+        <Link href="/category" className="hover:text-black transition-colors">
+          Categories
         </Link>
         {" / "}
         <span className="text-black">{match.name}</span>
