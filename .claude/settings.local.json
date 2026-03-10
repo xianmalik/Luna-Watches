@@ -13,7 +13,14 @@
       "Bash(export PATH=\"$HOME/.bun/bin:/usr/bin:/bin:/usr/local/bin:$PATH\")",
       "Bash(bun x tsc:*)",
       "Bash(bun add:*)",
-      "Bash(npm:*)"
+      "Bash(npm:*)",
+      "Bash(bunx:*)",
+      "Bash(bun:*)",
+      "Bash(~/.bun/bin/bunx:*)",
+      "Bash(node --version:*)",
+      "Bash([ -s \"$HOME/.nvm/nvm.sh\" ])",
+      "Bash(. \"$HOME/.nvm/nvm.sh\")",
+      "Bash(nvm use:*)"
     ],
     "deny": [],
     "ask": []
