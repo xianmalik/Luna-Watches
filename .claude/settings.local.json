@@ -8,7 +8,10 @@
       "Bash(bun run build:*)",
       "Bash(npx tsc:*)",
       "Bash(find:*)",
-      "Bash(export PATH=\"$HOME/.bun/bin:$HOME/.nvm/versions/node/v23.7.0/bin:$PATH\")"
+      "Bash(export PATH=\"$HOME/.bun/bin:$HOME/.nvm/versions/node/v23.7.0/bin:$PATH\")",
+      "Bash(xargs:*)",
+      "Bash(export PATH=\"$HOME/.bun/bin:/usr/bin:/bin:/usr/local/bin:$PATH\")",
+      "Bash(bun x tsc:*)"
     ],
     "deny": [],
     "ask": []
