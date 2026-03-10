@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { MenuIcon, ShoppingCart, User } from "lucide-react";
+import { MenuIcon, User } from "lucide-react";
 
-// sub components
 import SearchBar from "@/components/common/navigation/SearchBar";
-
+import CartIcon from "@/components/common/navigation/CartIcon";
 import { NAVBAR_PRIMARY_ITEMS } from "@/lib/app.settings";
 
 export default function Header() {
@@ -25,7 +24,7 @@ export default function Header() {
                 <div className="flex items-center justify-end gap-4">
                     <div className="hidden md:flex items-center gap-4">
                         <SearchBar />
-                        <Link href="/cart"><ShoppingCart /></Link>
+                        <CartIcon />
                     </div>
                     <Link href="/login"><User /></Link>
                 </div>

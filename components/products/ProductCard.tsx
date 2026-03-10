@@ -1,20 +1,39 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useCartStore } from "@/stores/cart-store";
 import type { Product } from "@/types/products";
 
 interface ProductCardProps {
     product?: Product;
-    onAddToCart?: () => void;
 }
 
-export default function ProductCard({
-    product,
-    onAddToCart
-}: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
+    const addToCart = useCartStore((state) => state.addToCart);
+    const [isAdding, setIsAdding] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
+
     if (!product) return null;
+
+    const handleAddToCart = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        setIsAdding(true);
+        try {
+            await addToCart(product.id, 1);
+            setShowSuccess(true);
+            setTimeout(() => setShowSuccess(false), 2000);
+        } catch (error) {
+            console.error("Failed to add to cart:", error);
+        } finally {
+            setIsAdding(false);
+        }
+    };
 
     const hasDiscount = product.discountPercentage > 0;
     const discountedPrice = hasDiscount
@@ -74,9 +93,19 @@ export default function ProductCard({
                     <Button
                         variant="outline"
                         className="w-full uppercase text-xs font-medium tracking-wide"
-                        onClick={onAddToCart}
+                        onClick={handleAddToCart}
+                        disabled={isAdding || showSuccess}
                     >
-                        Add to cart
+                        {showSuccess ? (
+                            <>
+                                <Check className="h-3 w-3 mr-2" />
+                                Added
+                            </>
+                        ) : isAdding ? (
+                            "Adding..."
+                        ) : (
+                            "Add to cart"
+                        )}
                     </Button>
                 </div>
             </CardContent>
