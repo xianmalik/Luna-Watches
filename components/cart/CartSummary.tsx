@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import type { Cart } from "@/types/cart";
 
@@ -49,9 +50,11 @@ export default function CartSummary({ cart }: CartSummaryProps) {
         </div>
       </div>
 
-      <Button className="w-full mt-6 uppercase text-sm font-medium tracking-wide h-12">
-        Proceed to Checkout
-      </Button>
+      <Link href="/checkout">
+        <Button className="w-full mt-6 uppercase text-sm font-medium tracking-wide h-12">
+          Proceed to Checkout
+        </Button>
+      </Link>
 
       <div className="mt-4 text-xs text-center text-neutral-500">
         Taxes and shipping calculated at checkout
