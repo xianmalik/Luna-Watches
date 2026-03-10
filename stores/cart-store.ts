@@ -84,41 +84,73 @@ export const useCartStore = create<CartStore>()(
 
       updateQuantity: async (productId: number, quantity: number) => {
         const { cart } = get();
-        if (!cart) return;
+        console.log("Store updateQuantity called:", { productId, quantity, cart });
 
-        try {
-          const products = cart.products.map((p) =>
-            p.id === productId ? { id: p.id, quantity } : { id: p.id, quantity: p.quantity }
-          );
-
-          const updatedCart = await updateCart(cart.id, { products });
-          set({ cart: updatedCart });
-        } catch (error) {
-          console.error("Failed to update quantity:", error);
-          throw error;
+        if (!cart) {
+          console.log("No cart found");
+          return;
         }
+
+        const updatedProducts = cart.products.map((p) => {
+          if (p.id === productId) {
+            const newQuantity = quantity;
+            const newTotal = p.price * newQuantity;
+            const newDiscountedTotal = newTotal * (1 - p.discountPercentage / 100);
+            return {
+              ...p,
+              quantity: newQuantity,
+              total: newTotal,
+              discountedTotal: newDiscountedTotal,
+            };
+          }
+          return p;
+        });
+
+        const newTotal = updatedProducts.reduce((sum, p) => sum + (p.total || p.price * p.quantity), 0);
+        const newDiscountedTotal = updatedProducts.reduce(
+          (sum, p) => sum + (p.discountedTotal || p.total || p.price * p.quantity),
+          0
+        );
+
+        const updatedCart: Cart = {
+          ...cart,
+          products: updatedProducts,
+          total: newTotal,
+          discountedTotal: newDiscountedTotal,
+          totalQuantity: updatedProducts.reduce((sum, p) => sum + p.quantity, 0),
+        };
+
+        console.log("Updated cart (client-side):", updatedCart);
+        set({ cart: updatedCart });
       },
 
       removeFromCart: async (productId: number) => {
         const { cart } = get();
         if (!cart) return;
 
-        try {
-          const products = cart.products
-            .filter((p) => p.id !== productId)
-            .map((p) => ({ id: p.id, quantity: p.quantity }));
+        const updatedProducts = cart.products.filter((p) => p.id !== productId);
 
-          if (products.length === 0) {
-            get().clearCart();
-            return;
-          }
-
-          const updatedCart = await updateCart(cart.id, { products });
-          set({ cart: updatedCart });
-        } catch (error) {
-          console.error("Failed to remove from cart:", error);
-          throw error;
+        if (updatedProducts.length === 0) {
+          get().clearCart();
+          return;
         }
+
+        const newTotal = updatedProducts.reduce((sum, p) => sum + (p.total || p.price * p.quantity), 0);
+        const newDiscountedTotal = updatedProducts.reduce(
+          (sum, p) => sum + (p.discountedTotal || p.total || p.price * p.quantity),
+          0
+        );
+
+        const updatedCart: Cart = {
+          ...cart,
+          products: updatedProducts,
+          total: newTotal,
+          discountedTotal: newDiscountedTotal,
+          totalProducts: updatedProducts.length,
+          totalQuantity: updatedProducts.reduce((sum, p) => sum + p.quantity, 0),
+        };
+
+        set({ cart: updatedCart });
       },
 
       clearCart: () => {

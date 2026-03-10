@@ -27,14 +27,17 @@ export async function PUT(
 
   try {
     const body: UpdateCartRequest = await request.json();
+    console.log("API PUT /cart/[id] - Updating cart:", { id, body });
     const data = await dummyjsonFetch<Cart>(`/carts/${id}`, {
       method: "PUT",
       body,
     });
+    console.log("API PUT /cart/[id] - Success:", data);
     return NextResponse.json(data);
-  } catch {
+  } catch (error) {
+    console.error("API PUT /cart/[id] - Error:", error);
     return NextResponse.json(
-      { error: "Failed to update cart" },
+      { error: "Failed to update cart", details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     );
   }
