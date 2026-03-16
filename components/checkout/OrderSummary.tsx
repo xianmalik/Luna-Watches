@@ -11,7 +11,7 @@ export default function OrderSummary({ cart }: OrderSummaryProps) {
   const subtotal = cart.total ?? 0;
   const discountedTotal = cart.discountedTotal ?? cart.total ?? 0;
   const discount = subtotal - discountedTotal;
-  const shipping = 0;
+  const shipping: number = 0;
   const total = discountedTotal + shipping;
 
   return (

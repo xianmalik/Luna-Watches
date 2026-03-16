@@ -20,7 +20,9 @@
       "Bash(node --version:*)",
       "Bash([ -s \"$HOME/.nvm/nvm.sh\" ])",
       "Bash(. \"$HOME/.nvm/nvm.sh\")",
-      "Bash(nvm use:*)"
+      "Bash(nvm use:*)",
+      "Bash(~/.bun/bin/bun run build)",
+      "Bash(node_modules/.bin/next build)"
     ],
     "deny": [],
     "ask": []
