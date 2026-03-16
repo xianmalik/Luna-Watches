@@ -4,9 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Trash2, Minus, Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cart-store";
-import { CART_CART_MAX_QUANTITY } from "@/lib/app.settings";
+import { CART_MAX_QUANTITY } from "@/lib/app.settings";
 import type { CartProduct } from "@/types/cart";
 
 interface CartItemProps {
