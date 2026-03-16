@@ -5,7 +5,6 @@ import FeaturesGrid from '@/blocks/FeaturesGrid'
 import HeroSlider from '@/blocks/HeroSlider'
 import ProductsGrid from '@/blocks/ProductsGrid'
 import {
-  HERO_SLIDES,
   HOME_BRANDS,
   HOME_COLLECTIONS,
   HOME_FEATURES,
@@ -13,6 +12,25 @@ import {
 } from '@/lib/app.settings'
 import { dummyjsonFetch } from '@/lib/dummyjson'
 import type { ProductsResponse } from '@/types/products'
+
+async function FeaturedHero() {
+  const { products } = await dummyjsonFetch<ProductsResponse>('/products', {
+    params: { limit: '3', skip: '10' },
+  })
+
+  const slides = products.map((product) => ({
+    image: product.images[0] ?? product.thumbnail,
+    title: product.title,
+    description: product.description,
+    button: {
+      text: `Shop ${product.category}`,
+      responsiveText: 'Shop Now',
+      url: `/products/${product.id}`,
+    },
+  }))
+
+  return <HeroSlider slides={slides} />
+}
 
 async function NewArrivals() {
   const { products } = await dummyjsonFetch<ProductsResponse>('/products', {
@@ -24,7 +42,17 @@ async function NewArrivals() {
 export default function Home() {
   return (
     <>
-      <HeroSlider slides={HERO_SLIDES} />
+      <Suspense
+        fallback={
+          <section className="container mx-auto px-4 md:px-16">
+            <div className="min-h-[600px] flex items-center justify-center">
+              <div className="h-12 w-48 bg-neutral-200 rounded animate-pulse" />
+            </div>
+          </section>
+        }
+      >
+        <FeaturedHero />
+      </Suspense>
       <BrandsGrid title="Popular Brands" brands={HOME_BRANDS} />
       <CollectionsGrid title="Collections" collections={HOME_COLLECTIONS} />
       <Suspense
