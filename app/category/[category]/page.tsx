@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { dummyjsonFetch } from "@/lib/dummyjson";
+import { PRODUCTS_PAGE_LIMIT, SITE_NAME } from "@/lib/app.settings";
 import type { ProductsResponse, ProductCategory } from "@/types/products";
 import CategoryPageClient from "./CategoryPageClient";
 
@@ -19,8 +20,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       return { title: "Category Not Found | Luna Store" };
     }
     return {
-      title: `${match.name} | Luna Store`,
-      description: `Browse our ${match.name} collection at Luna Store.`,
+      title: `${match.name} | ${SITE_NAME}`,
+      description: `Browse our ${match.name} collection at ${SITE_NAME}.`,
     };
   } catch {
     return { title: "Category Not Found | Luna Store" };
@@ -79,7 +80,7 @@ export default async function CategoryPage({ params }: PageProps) {
   try {
     productsData = await dummyjsonFetch<ProductsResponse>(
       `/products/category/${category}`,
-      { params: { limit: "194" } }
+      { params: { limit: String(PRODUCTS_PAGE_LIMIT) } }
     );
   } catch {
     // continue with no products

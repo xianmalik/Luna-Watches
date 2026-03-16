@@ -1,7 +1,7 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import type { ShippingInfo } from "@/components/checkout/CheckoutForm";
+import type { ShippingInfo } from "@/types/checkout";
 
 interface ShippingFormProps {
   shippingInfo: ShippingInfo;

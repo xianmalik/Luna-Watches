@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { SORT_OPTIONS } from "@/lib/app.settings";
 
 interface FilterToolbarProps {
   filtersVisible: boolean;
@@ -17,14 +18,6 @@ interface FilterToolbarProps {
   onSortChange: (value: string) => void;
   productCount: number;
 }
-
-const SORT_OPTIONS = [
-  { value: "title-asc", label: "Name: A to Z" },
-  { value: "title-desc", label: "Name: Z to A" },
-  { value: "price-asc", label: "Price: Low to High" },
-  { value: "price-desc", label: "Price: High to Low" },
-  { value: "rating-desc", label: "Rating: High to Low" },
-];
 
 export default function FilterToolbar({
   filtersVisible,

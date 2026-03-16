@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Search, Loader2 } from "lucide-react";
+import { SEARCH_DEBOUNCE_MS } from "@/lib/app.settings";
 import {
   CommandDialog,
   CommandEmpty,
@@ -61,7 +62,7 @@ export default function SearchCommand({ iconOnly = false }: SearchCommandProps) 
   useEffect(() => {
     const timer = setTimeout(() => {
       searchProducts(query);
-    }, 300);
+    }, SEARCH_DEBOUNCE_MS);
 
     return () => clearTimeout(timer);
   }, [query, searchProducts]);

@@ -1,9 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
 import type { ProductFilters } from "./types";
+import FilterSection from "./FilterSection";
 import PriceFilter from "./modules/PriceFilter";
 import BrandFilter from "./modules/BrandFilter";
 import CategoryFilter from "./modules/CategoryFilter";
@@ -18,36 +16,6 @@ interface FilterSidebarProps {
   priceMin: number;
   priceMax: number;
   availabilityStatuses: string[];
-}
-
-function FilterSection({
-  title,
-  children,
-  defaultOpen = true,
-}: {
-  title: string;
-  children: React.ReactNode;
-  defaultOpen?: boolean;
-}) {
-  const [open, setOpen] = useState(defaultOpen);
-
-  return (
-    <div className="border-b border-neutral-200 py-4">
-      <button
-        onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between text-xs font-semibold uppercase tracking-wider"
-      >
-        {title}
-        <ChevronDown
-          className={cn(
-            "h-4 w-4 transition-transform",
-            open && "rotate-180"
-          )}
-        />
-      </button>
-      {open && <div className="mt-4">{children}</div>}
-    </div>
-  );
 }
 
 export default function FilterSidebar({

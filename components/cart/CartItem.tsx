@@ -6,13 +6,12 @@ import Link from "next/link";
 import { Trash2, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cart-store";
+import { CART_CART_MAX_QUANTITY } from "@/lib/app.settings";
 import type { CartProduct } from "@/types/cart";
 
 interface CartItemProps {
   product: CartProduct;
 }
-
-const MAX_QUANTITY = 99;
 
 export default function CartItem({ product }: CartItemProps) {
   const updateQuantity = useCartStore((state) => state.updateQuantity);
@@ -29,27 +28,12 @@ export default function CartItem({ product }: CartItemProps) {
   }, [product.quantity, isEditing]);
 
   const handleQuantityChange = async (newQuantity: number) => {
-    console.log("handleQuantityChange called:", {
-      productId: product.id,
-      currentQuantity: product.quantity,
-      newQuantity
-    });
-
-    if (newQuantity < 1 || newQuantity > MAX_QUANTITY) {
-      console.log("Invalid quantity (out of range)");
-      return;
-    }
-
-    if (newQuantity === product.quantity) {
-      console.log("Quantity unchanged, skipping update");
-      return;
-    }
+    if (newQuantity < 1 || newQuantity > CART_MAX_QUANTITY) return;
+    if (newQuantity === product.quantity) return;
 
     setIsUpdating(true);
     try {
-      console.log("Calling updateQuantity...");
       await updateQuantity(product.id, newQuantity);
-      console.log("Update successful");
       setInputValue(newQuantity.toString());
     } catch (error) {
       console.error("Failed to update quantity:", error);
@@ -69,7 +53,7 @@ export default function CartItem({ product }: CartItemProps) {
   const handleInputBlur = () => {
     setIsEditing(false);
     const newQuantity = parseInt(inputValue) || 1;
-    const clampedQuantity = Math.min(Math.max(newQuantity, 1), MAX_QUANTITY);
+    const clampedQuantity = Math.min(Math.max(newQuantity, 1), CART_MAX_QUANTITY);
     handleQuantityChange(clampedQuantity);
   };
 
@@ -160,7 +144,7 @@ export default function CartItem({ product }: CartItemProps) {
 
             <button
               onClick={() => handleQuantityChange(product.quantity + 1)}
-              disabled={isUpdating || product.quantity >= MAX_QUANTITY}
+              disabled={isUpdating || product.quantity >= CART_MAX_QUANTITY}
               className="p-2 hover:bg-neutral-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               aria-label="Increase quantity"
             >

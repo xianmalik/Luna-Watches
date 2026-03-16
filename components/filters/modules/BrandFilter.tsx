@@ -3,14 +3,13 @@
 import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import { FILTER_INITIAL_VISIBLE_COUNT } from "@/lib/app.settings";
 
 interface BrandFilterProps {
   brands: string[];
   selected: string[];
   onChange: (brands: string[]) => void;
 }
-
-const INITIAL_VISIBLE = 8;
 
 export default function BrandFilter({
   brands,
@@ -24,8 +23,8 @@ export default function BrandFilter({
     ? brands.filter((b) => b.toLowerCase().includes(search.toLowerCase()))
     : brands;
 
-  const visible = showAll ? filtered : filtered.slice(0, INITIAL_VISIBLE);
-  const hiddenCount = filtered.length - INITIAL_VISIBLE;
+  const visible = showAll ? filtered : filtered.slice(0, FILTER_INITIAL_VISIBLE_COUNT);
+  const hiddenCount = filtered.length - FILTER_INITIAL_VISIBLE_COUNT;
 
   function toggle(brand: string) {
     onChange(

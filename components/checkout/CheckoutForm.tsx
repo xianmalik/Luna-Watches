@@ -7,19 +7,7 @@ import ShippingForm from "@/components/checkout/ShippingForm";
 import PaymentMethod from "@/components/checkout/PaymentMethod";
 import OrderSummary from "@/components/checkout/OrderSummary";
 import { Button } from "@/components/ui/button";
-
-export interface ShippingInfo {
-  fullName: string;
-  email: string;
-  phone: string;
-  address: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  country: string;
-}
-
-export type PaymentMethodType = "cod" | "bank";
+import type { ShippingInfo, PaymentMethodType } from "@/types/checkout";
 
 export default function CheckoutForm() {
   const router = useRouter();

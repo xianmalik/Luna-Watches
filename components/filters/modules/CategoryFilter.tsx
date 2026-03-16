@@ -2,14 +2,13 @@
 
 import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { FILTER_INITIAL_VISIBLE_COUNT } from "@/lib/app.settings";
 
 interface CategoryFilterProps {
   categories: { slug: string; name: string; count: number }[];
   selected: string[];
   onChange: (categories: string[]) => void;
 }
-
-const INITIAL_VISIBLE = 8;
 
 export default function CategoryFilter({
   categories,
@@ -18,8 +17,8 @@ export default function CategoryFilter({
 }: CategoryFilterProps) {
   const [showAll, setShowAll] = useState(false);
 
-  const visible = showAll ? categories : categories.slice(0, INITIAL_VISIBLE);
-  const hiddenCount = categories.length - INITIAL_VISIBLE;
+  const visible = showAll ? categories : categories.slice(0, FILTER_INITIAL_VISIBLE_COUNT);
+  const hiddenCount = categories.length - FILTER_INITIAL_VISIBLE_COUNT;
 
   function toggle(slug: string) {
     onChange(

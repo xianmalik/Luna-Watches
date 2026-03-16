@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/common/header";
 import Footer from "@/components/common/footer";
+import { SITE_NAME, SITE_DESCRIPTION } from "@/lib/app.settings";
 
 const poppins = Poppins({
   variable: "--font-sans",
@@ -11,8 +12,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Luna Store",
-  description: "Your destination for quality products at great prices",
+  title: SITE_NAME,
+  description: SITE_DESCRIPTION,
 };
 
 export default function RootLayout({

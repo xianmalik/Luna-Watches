@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useCartStore } from "@/stores/cart-store";
+import { ADD_TO_CART_SUCCESS_MS } from "@/lib/app.settings";
 import type { Product } from "@/types/products";
 
 interface ProductCardProps {
@@ -27,7 +28,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         try {
             await addToCart(product.id, 1);
             setShowSuccess(true);
-            setTimeout(() => setShowSuccess(false), 2000);
+            setTimeout(() => setShowSuccess(false), ADD_TO_CART_SUCCESS_MS);
         } catch (error) {
             console.error("Failed to add to cart:", error);
         } finally {

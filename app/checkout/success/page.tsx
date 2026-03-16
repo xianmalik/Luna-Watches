@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { CheckCircle, Package, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { PAYMENT_METHOD_LABELS } from "@/lib/app.settings";
 
 interface Order {
   id: number;
@@ -44,8 +45,7 @@ export default function CheckoutSuccessPage() {
     );
   }
 
-  const paymentMethodLabel =
-    order.paymentMethod === "cod" ? "Cash on Delivery" : "Bank Transfer";
+  const paymentMethodLabel = PAYMENT_METHOD_LABELS[order.paymentMethod] ?? order.paymentMethod;
 
   return (
     <div className="container mx-auto max-w-screen-md px-4 py-8">

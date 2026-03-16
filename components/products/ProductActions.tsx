@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Heart, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cart-store";
+import { ADD_TO_CART_SUCCESS_MS } from "@/lib/app.settings";
 
 interface ProductActionsProps {
   productId?: number;
@@ -21,7 +22,7 @@ export default function ProductActions({ productId }: ProductActionsProps) {
     try {
       await addToCart(productId, 1);
       setShowSuccess(true);
-      setTimeout(() => setShowSuccess(false), 2000);
+      setTimeout(() => setShowSuccess(false), ADD_TO_CART_SUCCESS_MS);
     } catch (error) {
       console.error("Failed to add to cart:", error);
     } finally {

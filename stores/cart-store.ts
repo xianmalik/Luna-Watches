@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import type { Cart } from "@/types/cart";
 import { createCart, updateCart, getCartsByUser } from "@/services/cart";
+import { CART_GUEST_USER_ID } from "@/lib/app.settings";
 
 interface CartState {
   cart: Cart | null;
@@ -20,8 +21,6 @@ interface CartActions {
 
 export type CartStore = CartState & CartActions;
 
-const USER_ID = 1;
-
 export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
@@ -39,7 +38,7 @@ export const useCartStore = create<CartStore>()(
 
         set({ isLoading: true });
         try {
-          const response = await getCartsByUser(USER_ID);
+          const response = await getCartsByUser(CART_GUEST_USER_ID);
           if (response.carts && response.carts.length > 0) {
             set({ cart: response.carts[0] });
           }
@@ -56,7 +55,7 @@ export const useCartStore = create<CartStore>()(
         try {
           if (!cart) {
             const newCart = await createCart({
-              userId: USER_ID,
+              userId: CART_GUEST_USER_ID,
               products: [{ id: productId, quantity }],
             });
             set({ cart: newCart });
@@ -84,12 +83,7 @@ export const useCartStore = create<CartStore>()(
 
       updateQuantity: async (productId: number, quantity: number) => {
         const { cart } = get();
-        console.log("Store updateQuantity called:", { productId, quantity, cart });
-
-        if (!cart) {
-          console.log("No cart found");
-          return;
-        }
+        if (!cart) return;
 
         const updatedProducts = cart.products.map((p) => {
           if (p.id === productId) {
@@ -120,7 +114,6 @@ export const useCartStore = create<CartStore>()(
           totalQuantity: updatedProducts.reduce((sum, p) => sum + p.quantity, 0),
         };
 
-        console.log("Updated cart (client-side):", updatedCart);
         set({ cart: updatedCart });
       },
 

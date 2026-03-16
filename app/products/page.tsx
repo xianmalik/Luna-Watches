@@ -1,16 +1,17 @@
 import { dummyjsonFetch } from "@/lib/dummyjson";
+import { PRODUCTS_PAGE_LIMIT, SITE_NAME } from "@/lib/app.settings";
 import type { ProductsResponse, ProductCategory } from "@/types/products";
 import ProductsPageClient from "./ProductsPageClient";
 
 export const metadata = {
-  title: "All Products | Luna Store",
+  title: `All Products | ${SITE_NAME}`,
   description: "Browse our full collection of products.",
 };
 
 export default async function ProductsPage() {
   const [productsData, categoriesData] = await Promise.all([
     dummyjsonFetch<ProductsResponse>("/products", {
-      params: { limit: "194" },
+      params: { limit: String(PRODUCTS_PAGE_LIMIT) },
     }),
     dummyjsonFetch<ProductCategory[]>("/products/categories"),
   ]);
