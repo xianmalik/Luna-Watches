@@ -26,7 +26,8 @@
       "Bash(node_modules/.bin/biome check .)",
       "Bash(node_modules/.bin/biome check . --max-diagnostics=200)",
       "Bash(node_modules/.bin/biome check --write .)",
-      "Bash(node_modules/.bin/biome check --write --unsafe .)"
+      "Bash(node_modules/.bin/biome check --write --unsafe .)",
+      "Bash(test -d /c/gh/Luna-Watches/styles)"
     ],
     "deny": [],
     "ask": []

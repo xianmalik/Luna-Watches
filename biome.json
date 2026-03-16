@@ -19,8 +19,6 @@
       "!bun.lock",
       "!**/*.md",
       "!**/*.mdx",
-      "!**/tailwind.css",
-      "!**/root.css",
       "!**/*.grit"
     ]
   },
@@ -219,32 +217,13 @@
       }
     },
     {
-      "includes": ["**/*.module.css"],
-      "linter": {
-        "rules": {
-          "correctness": {
-            "noUnknownProperty": "off"
-          },
-          "style": {
-            "noDescendingSpecificity": "off"
-          }
-        }
-      }
-    },
-    {
-      "includes": ["styles/css/root.css"],
+      "includes": ["app/globals.css"],
       "linter": {
         "rules": {
           "suspicious": {
             "noDuplicateCustomProperties": "off"
           }
         }
-      }
-    },
-    {
-      "includes": ["styles/css/typography.css"],
-      "linter": {
-        "enabled": false
       }
     },
     {
