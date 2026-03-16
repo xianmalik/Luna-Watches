@@ -4,14 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Search, Loader2 } from "lucide-react";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
-  Command,
+  CommandDialog,
   CommandEmpty,
   CommandGroup,
   CommandInput,
@@ -104,67 +97,62 @@ export default function SearchCommand({ iconOnly = false }: SearchCommandProps) 
         <span className="sr-only">Search</span>
       </Button>
 
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="p-0 gap-0 max-w-2xl">
-          <DialogHeader className="sr-only">
-            <DialogTitle>Search Products</DialogTitle>
-            <DialogDescription>
-              Search for products in our catalog
-            </DialogDescription>
-          </DialogHeader>
-          <Command className="rounded-lg border-none">
-            <CommandInput
-              placeholder="Search products..."
-              value={query}
-              onValueChange={setQuery}
-            />
-            <CommandList>
-              {isSearching && (
-                <div className="flex items-center justify-center py-6">
-                  <Loader2 className="h-6 w-6 animate-spin text-neutral-400" />
-                </div>
-              )}
+      <CommandDialog
+        open={open}
+        onOpenChange={setOpen}
+        title="Search Products"
+        description="Search for products in our catalog"
+      >
+        <CommandInput
+          placeholder="Search products..."
+          value={query}
+          onValueChange={setQuery}
+        />
+        <CommandList>
+          {isSearching && (
+            <div className="flex items-center justify-center py-6">
+              <Loader2 className="h-6 w-6 animate-spin text-neutral-400" />
+            </div>
+          )}
 
-              {!isSearching && query && products.length === 0 && (
-                <CommandEmpty>No products found.</CommandEmpty>
-              )}
+          {!isSearching && query && products.length === 0 && (
+            <CommandEmpty>No products found.</CommandEmpty>
+          )}
 
-              {!isSearching && products.length > 0 && (
-                <CommandGroup heading="Products">
-                  {products.map((product) => (
-                    <CommandItem
-                      key={product.id}
-                      value={product.title}
-                      onSelect={() => handleSelect(product.id)}
-                      className="flex items-center gap-3 px-4 py-3 cursor-pointer"
-                    >
-                      <div
-                        className="w-12 h-12 bg-neutral-100 rounded flex-shrink-0 bg-cover bg-center"
-                        style={{ backgroundImage: `url(${product.thumbnail})` }}
-                      />
-                      <div className="flex-1 min-w-0">
-                        <p className="font-medium truncate">{product.title}</p>
-                        <p className="text-xs text-neutral-500 truncate">
-                          {product.category}
-                        </p>
-                      </div>
-                      <div className="text-sm font-semibold">
-                        ${product.price.toFixed(2)}
-                      </div>
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-              )}
+          {!isSearching && products.length > 0 && (
+            <CommandGroup heading="Products">
+              {products.map((product) => (
+                <CommandItem
+                  key={product.id}
+                  value={product.title}
+                  onSelect={() => handleSelect(product.id)}
+                  className="flex items-center gap-3 px-4 py-3 cursor-pointer"
+                >
+                  <div
+                    className="w-12 h-12 bg-neutral-100 rounded flex-shrink-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${product.thumbnail})` }}
+                  />
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium truncate">{product.title}</p>
+                    <p className="text-xs text-neutral-500 truncate">
+                      {product.category}
+                    </p>
+                  </div>
+                  <div className="text-sm font-semibold">
+                    ${product.price.toFixed(2)}
+                  </div>
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          )}
 
-              {!query && !isSearching && (
-                <div className="py-6 text-center text-sm text-neutral-500">
-                  Start typing to search for products
-                </div>
-              )}
-            </CommandList>
-          </Command>
-        </DialogContent>
-      </Dialog>
+          {!query && !isSearching && (
+            <div className="py-6 text-center text-sm text-neutral-500">
+              Start typing to search for products
+            </div>
+          )}
+        </CommandList>
+      </CommandDialog>
     </>
   );
 }
