@@ -28,6 +28,7 @@ export default function OrderSummary({ cart }: OrderSummaryProps) {
                 src={product.thumbnail}
                 alt={product.title}
                 fill
+                sizes="64px"
                 className="object-cover rounded"
               />
               <span className="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">

@@ -17,6 +17,7 @@ export default function ProductShowcase({
         src={image}
         alt={title ?? 'Product showcase'}
         fill
+        sizes="100vw"
         className="object-contain"
       />
     </section>

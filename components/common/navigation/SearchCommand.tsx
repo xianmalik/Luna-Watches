@@ -1,6 +1,7 @@
 'use client'
 
 import { Loader2, Search } from 'lucide-react'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
@@ -131,10 +132,17 @@ export default function SearchCommand({
                   onSelect={() => handleSelect(product.id)}
                   className="flex items-center gap-3 px-4 py-3 cursor-pointer"
                 >
-                  <div
-                    className="w-12 h-12 bg-neutral-100 rounded flex-shrink-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${product.thumbnail})` }}
-                  />
+                  <div className="relative w-12 h-12 bg-neutral-100 rounded flex-shrink-0 overflow-hidden">
+                    {product.thumbnail && (
+                      <Image
+                        src={product.thumbnail}
+                        alt={product.title}
+                        fill
+                        sizes="48px"
+                        className="object-cover"
+                      />
+                    )}
+                  </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-medium truncate">{product.title}</p>
                     <p className="text-xs text-neutral-500 truncate">

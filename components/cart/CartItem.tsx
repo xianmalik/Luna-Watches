@@ -96,6 +96,7 @@ export default function CartItem({ product }: CartItemProps) {
           src={product.thumbnail}
           alt={product.title}
           fill
+          sizes="96px"
           className="object-cover rounded"
         />
       </div>

@@ -9,6 +9,13 @@ interface PageProps {
   params: Promise<{ category: string }>
 }
 
+export async function generateStaticParams() {
+  const categories = await dummyjsonFetch<ProductCategory[]>(
+    '/products/categories'
+  )
+  return categories.map((cat) => ({ category: cat.slug }))
+}
+
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {

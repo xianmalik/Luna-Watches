@@ -1,16 +1,25 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 import ProductShowcase from '@/blocks/ProductShowcase'
 import ProductSpecification from '@/blocks/ProductSpecification'
 import ProductsGrid from '@/blocks/ProductsGrid'
 import ProductActions from '@/components/products/ProductActions'
 import ProductImageGallery from '@/components/products/ProductImageGallery'
+import { RELATED_PRODUCTS_LIMIT } from '@/lib/app.settings'
 import { dummyjsonFetch } from '@/lib/dummyjson'
 import type { Product, ProductsResponse } from '@/types/products'
 
 interface PageProps {
   params: Promise<{ id: string }>
+}
+
+export async function generateStaticParams() {
+  const data = await dummyjsonFetch<ProductsResponse>('/products', {
+    params: { limit: '0', select: 'id' },
+  })
+  return data.products.map((product) => ({ id: String(product.id) }))
 }
 
 export async function generateMetadata({
@@ -28,6 +37,26 @@ export async function generateMetadata({
   }
 }
 
+async function RelatedProducts({
+  category,
+  currentId,
+}: {
+  category: string
+  currentId: number
+}) {
+  try {
+    const data = await dummyjsonFetch<ProductsResponse>(
+      `/products/category/${category}`,
+      { params: { limit: String(RELATED_PRODUCTS_LIMIT) } }
+    )
+    const related = data.products.filter((p) => p.id !== currentId).slice(0, 5)
+    if (related.length === 0) return null
+    return <ProductsGrid title="You May Also Like" products={related} />
+  } catch {
+    return null
+  }
+}
+
 export default async function ProductDetailPage({ params }: PageProps) {
   const { id } = await params
 
@@ -38,19 +67,6 @@ export default async function ProductDetailPage({ params }: PageProps) {
     notFound()
   }
 
-  let relatedProducts: Product[] = []
-  try {
-    const data = await dummyjsonFetch<ProductsResponse>(
-      `/products/category/${product.category}`,
-      { params: { limit: '6' } }
-    )
-    relatedProducts = data.products
-      .filter((p) => p.id !== product.id)
-      .slice(0, 5)
-  } catch {
-    // ignore
-  }
-
   const hasDiscount = product.discountPercentage > 0
   const discountedPrice = hasDiscount
     ? product.price * (1 - product.discountPercentage / 100)
@@ -58,7 +74,6 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
   return (
     <div className="container mx-auto max-w-screen-xl px-4 py-8">
-      {/* Breadcrumb */}
       <nav className="text-sm text-neutral-500 mb-8">
         <Link href="/" className="hover:text-black transition-colors">
           Home
@@ -71,12 +86,9 @@ export default async function ProductDetailPage({ params }: PageProps) {
         <span className="text-black">{product.title}</span>
       </nav>
 
-      {/* Product Hero: Image Gallery + Info */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-        {/* Left: Image Gallery */}
         <ProductImageGallery images={product.images} title={product.title} />
 
-        {/* Right: Product Info */}
         <div className="space-y-6">
           {product.brand && (
             <p className="text-lg font-medium uppercase tracking-wide">
@@ -93,7 +105,6 @@ export default async function ProductDetailPage({ params }: PageProps) {
             )}
           </div>
 
-          {/* Price */}
           <div className="flex items-center gap-3">
             {discountedPrice ? (
               <>
@@ -123,7 +134,6 @@ export default async function ProductDetailPage({ params }: PageProps) {
             )}
           </div>
 
-          {/* Description */}
           <div>
             <h2 className="text-sm font-semibold uppercase tracking-wide mb-3">
               Description
@@ -133,12 +143,10 @@ export default async function ProductDetailPage({ params }: PageProps) {
             </p>
           </div>
 
-          {/* Actions */}
           <ProductActions productId={product.id} />
         </div>
       </div>
 
-      {/* Specification */}
       <div className="mb-16">
         <ProductSpecification
           weight={product.weight}
@@ -151,17 +159,31 @@ export default async function ProductDetailPage({ params }: PageProps) {
         />
       </div>
 
-      {/* Product Showcase Image */}
       {product.images?.[1] && (
         <div className="mb-16">
           <ProductShowcase image={product.images[1]} title={product.title} />
         </div>
       )}
 
-      {/* You May Also Like */}
-      {relatedProducts.length > 0 && (
-        <ProductsGrid title="You May Also Like" products={relatedProducts} />
-      )}
+      <Suspense
+        fallback={
+          <div className="animate-pulse space-y-4">
+            <div className="h-6 w-48 bg-neutral-200 rounded" />
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              {Array.from({ length: 5 }, (_, i) => `skeleton-${i}`).map(
+                (key) => (
+                  <div
+                    key={key}
+                    className="aspect-square bg-neutral-200 rounded"
+                  />
+                )
+              )}
+            </div>
+          </div>
+        }
+      >
+        <RelatedProducts category={product.category} currentId={product.id} />
+      </Suspense>
     </div>
   )
 }

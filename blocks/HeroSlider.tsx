@@ -74,6 +74,7 @@ export default function HeroSlider({ slides }: HeroSliderProps) {
                     alt={slide.title}
                     height={550}
                     width={430}
+                    priority
                   />
                 </div>
               </div>
