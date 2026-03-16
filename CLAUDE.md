@@ -125,3 +125,15 @@ Primary navigation items are centrally configured in `lib/app.settings.ts` using
 4. **No comments unless requested** - Do not add code comments unless explicitly asked. However, JSDoc comments are encouraged for utility functions and helper functions in `lib/` directory.
 
 5. **Always check for null/undefined props** - Perform null or undefined checks for all prop variables before using them in components.
+
+6. **Always follow Biome for code quality** - All code must conform to the rules defined in `biome.json`. Key rules to follow proactively:
+   - **Formatting**: single quotes, no semicolons, 2-space indent, 80-char line width, LF line endings, ES5 trailing commas
+   - **Filenames**: use `kebab-case`, `camelCase`, or `PascalCase` — no other conventions
+   - **Imports**: always use `import type` for type-only imports in `.ts`/`.tsx` files; organize imports (no unused imports)
+   - **Buttons**: always provide explicit `type="button"` on `<button>` elements (or `type="submit"` / `type="reset"` as appropriate)
+   - **Array keys**: never use array index as React `key` — use a stable unique identifier (id, slug, name, value)
+   - **Ternaries**: no nested ternaries — use `if/else` or early-assignment with `let` instead
+   - **Labels**: `<label>` must have `htmlFor` paired with a matching `id` on its control
+   - **Click events on non-interactive elements**: never add `onClick` to `<div>`, `<span>`, etc. — use `<button>` or `<a>` instead
+   - **`components/ui/`**: do not modify shadcn/ui primitives directly; Biome rules for that folder are relaxed via overrides
+   - Run `bun run lint` to check and `bun run lint:fix` to auto-fix before considering any task complete
