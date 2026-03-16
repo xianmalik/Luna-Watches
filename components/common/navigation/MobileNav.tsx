@@ -1,21 +1,21 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu } from 'lucide-react'
+import Link from 'next/link'
+import { useState } from 'react'
+import SearchCommand from '@/components/common/navigation/SearchCommand'
+import { Button } from '@/components/ui/button'
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { NAVBAR_PRIMARY_ITEMS } from "@/lib/app.settings";
-import SearchCommand from "@/components/common/navigation/SearchCommand";
+} from '@/components/ui/sheet'
+import { NAVBAR_PRIMARY_ITEMS } from '@/lib/app.settings'
 
 export default function MobileNav() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -54,5 +54,5 @@ export default function MobileNav() {
         </div>
       </SheetContent>
     </Sheet>
-  );
+  )
 }

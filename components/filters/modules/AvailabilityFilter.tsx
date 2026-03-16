@@ -1,11 +1,11 @@
-"use client";
+'use client'
 
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from '@/components/ui/checkbox'
 
 interface AvailabilityFilterProps {
-  statuses: string[];
-  selected: string[];
-  onChange: (statuses: string[]) => void;
+  statuses: string[]
+  selected: string[]
+  onChange: (statuses: string[]) => void
 }
 
 export default function AvailabilityFilter({
@@ -18,7 +18,7 @@ export default function AvailabilityFilter({
       selected.includes(status)
         ? selected.filter((s) => s !== status)
         : [...selected, status]
-    );
+    )
   }
 
   return (
@@ -26,9 +26,11 @@ export default function AvailabilityFilter({
       {statuses.map((status) => (
         <label
           key={status}
+          htmlFor={`availability-${status}`}
           className="flex items-center gap-2 text-sm cursor-pointer"
         >
           <Checkbox
+            id={`availability-${status}`}
             checked={selected.includes(status)}
             onCheckedChange={() => toggle(status)}
           />
@@ -36,5 +38,5 @@ export default function AvailabilityFilter({
         </label>
       ))}
     </div>
-  );
+  )
 }

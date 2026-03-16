@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import CheckoutForm from "@/components/checkout/CheckoutForm";
+import type { Metadata } from 'next'
+import CheckoutForm from '@/components/checkout/CheckoutForm'
 
 export const metadata: Metadata = {
-  title: "Checkout | Luna Store",
-  description: "Complete your order",
-};
+  title: 'Checkout | Luna Store',
+  description: 'Complete your order',
+}
 
 export default function CheckoutPage() {
   return (
@@ -14,5 +14,5 @@ export default function CheckoutPage() {
       </h1>
       <CheckoutForm />
     </div>
-  );
+  )
 }

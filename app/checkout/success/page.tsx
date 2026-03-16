@@ -1,36 +1,36 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { CheckCircle, Package, Mail } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { PAYMENT_METHOD_LABELS } from "@/lib/app.settings";
+import { CheckCircle, Mail, Package } from 'lucide-react'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { PAYMENT_METHOD_LABELS } from '@/lib/app.settings'
 
 interface Order {
-  id: number;
+  id: number
   shippingInfo: {
-    fullName: string;
-    email: string;
-    address: string;
-    city: string;
-    state: string;
-    zipCode: string;
-    country: string;
-  };
-  paymentMethod: string;
-  total: number;
-  createdAt: string;
+    fullName: string
+    email: string
+    address: string
+    city: string
+    state: string
+    zipCode: string
+    country: string
+  }
+  paymentMethod: string
+  total: number
+  createdAt: string
 }
 
 export default function CheckoutSuccessPage() {
-  const [order, setOrder] = useState<Order | null>(null);
+  const [order, setOrder] = useState<Order | null>(null)
 
   useEffect(() => {
-    const orderData = localStorage.getItem("lastOrder");
+    const orderData = localStorage.getItem('lastOrder')
     if (orderData) {
-      setOrder(JSON.parse(orderData));
+      setOrder(JSON.parse(orderData))
     }
-  }, []);
+  }, [])
 
   if (!order) {
     return (
@@ -42,10 +42,11 @@ export default function CheckoutSuccessPage() {
           </Link>
         </div>
       </div>
-    );
+    )
   }
 
-  const paymentMethodLabel = PAYMENT_METHOD_LABELS[order.paymentMethod] ?? order.paymentMethod;
+  const paymentMethodLabel =
+    PAYMENT_METHOD_LABELS[order.paymentMethod] ?? order.paymentMethod
 
   return (
     <div className="container mx-auto max-w-screen-md px-4 py-8">
@@ -57,8 +58,8 @@ export default function CheckoutSuccessPage() {
           Order Confirmed!
         </h1>
         <p className="text-neutral-600">
-          Thank you for your order. We&apos;ve received your order and will process it
-          shortly.
+          Thank you for your order. We&apos;ve received your order and will
+          process it shortly.
         </p>
       </div>
 
@@ -83,7 +84,7 @@ export default function CheckoutSuccessPage() {
                 <p>{order.shippingInfo.fullName}</p>
                 <p>{order.shippingInfo.address}</p>
                 <p>
-                  {order.shippingInfo.city}, {order.shippingInfo.state}{" "}
+                  {order.shippingInfo.city}, {order.shippingInfo.state}{' '}
                   {order.shippingInfo.zipCode}
                 </p>
                 <p>{order.shippingInfo.country}</p>
@@ -108,7 +109,7 @@ export default function CheckoutSuccessPage() {
             <div className="flex-1">
               <h3 className="font-medium mb-2">Payment Method</h3>
               <p className="text-sm text-neutral-600">{paymentMethodLabel}</p>
-              {order.paymentMethod === "bank" && (
+              {order.paymentMethod === 'bank' && (
                 <p className="text-xs text-neutral-500 mt-2">
                   Please complete your bank transfer using order #{order.id} as
                   reference
@@ -132,7 +133,10 @@ export default function CheckoutSuccessPage() {
 
       <div className="flex gap-4">
         <Link href="/" className="flex-1">
-          <Button variant="outline" className="w-full uppercase text-sm font-medium tracking-wide">
+          <Button
+            variant="outline"
+            className="w-full uppercase text-sm font-medium tracking-wide"
+          >
             Continue Shopping
           </Button>
         </Link>
@@ -143,5 +147,5 @@ export default function CheckoutSuccessPage() {
         </Link>
       </div>
     </div>
-  );
+  )
 }

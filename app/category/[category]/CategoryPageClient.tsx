@@ -1,20 +1,20 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import type { Product } from "@/types/products";
-import type { ProductFilters } from "@/components/filters/types";
-import { createDefaultFilters } from "@/components/filters/types";
-import { useProductFilters } from "@/components/filters/useProductFilters";
-import FilterToolbar from "@/components/filters/FilterToolbar";
-import CategoryFilterSidebar from "./CategoryFilterSidebar";
-import ProductCard from "@/components/products/ProductCard";
+import { useState } from 'react'
+import FilterToolbar from '@/components/filters/FilterToolbar'
+import type { ProductFilters } from '@/components/filters/types'
+import { createDefaultFilters } from '@/components/filters/types'
+import { useProductFilters } from '@/components/filters/useProductFilters'
+import ProductCard from '@/components/products/ProductCard'
+import type { Product } from '@/types/products'
+import CategoryFilterSidebar from './CategoryFilterSidebar'
 
 interface CategoryPageClientProps {
-  allProducts: Product[];
-  brands: string[];
-  priceMin: number;
-  priceMax: number;
-  availabilityStatuses: string[];
+  allProducts: Product[]
+  brands: string[]
+  priceMin: number
+  priceMax: number
+  availabilityStatuses: string[]
 }
 
 export default function CategoryPageClient({
@@ -26,16 +26,16 @@ export default function CategoryPageClient({
 }: CategoryPageClientProps) {
   const [filters, setFilters] = useState<ProductFilters>(() =>
     createDefaultFilters(priceMin, priceMax)
-  );
-  const [filtersVisible, setFiltersVisible] = useState(true);
+  )
+  const [filtersVisible, setFiltersVisible] = useState(true)
 
-  const filteredProducts = useProductFilters(allProducts, filters);
+  const filteredProducts = useProductFilters(allProducts, filters)
 
-  const sortValue = `${filters.sortBy}-${filters.order}`;
+  const sortValue = `${filters.sortBy}-${filters.order}`
 
   function handleSortChange(value: string) {
-    const [sortBy, order] = value.split("-") as [string, "asc" | "desc"];
-    setFilters((prev) => ({ ...prev, sortBy, order }));
+    const [sortBy, order] = value.split('-') as [string, 'asc' | 'desc']
+    setFilters((prev) => ({ ...prev, sortBy, order }))
   }
 
   return (
@@ -77,5 +77,5 @@ export default function CategoryPageClient({
         </div>
       </div>
     </div>
-  );
+  )
 }

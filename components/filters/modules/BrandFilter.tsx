@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { FILTER_INITIAL_VISIBLE_COUNT } from "@/lib/app.settings";
+import { useState } from 'react'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Input } from '@/components/ui/input'
+import { FILTER_INITIAL_VISIBLE_COUNT } from '@/lib/app.settings'
 
 interface BrandFilterProps {
-  brands: string[];
-  selected: string[];
-  onChange: (brands: string[]) => void;
+  brands: string[]
+  selected: string[]
+  onChange: (brands: string[]) => void
 }
 
 export default function BrandFilter({
@@ -16,22 +16,24 @@ export default function BrandFilter({
   selected,
   onChange,
 }: BrandFilterProps) {
-  const [search, setSearch] = useState("");
-  const [showAll, setShowAll] = useState(false);
+  const [search, setSearch] = useState('')
+  const [showAll, setShowAll] = useState(false)
 
   const filtered = search
     ? brands.filter((b) => b.toLowerCase().includes(search.toLowerCase()))
-    : brands;
+    : brands
 
-  const visible = showAll ? filtered : filtered.slice(0, FILTER_INITIAL_VISIBLE_COUNT);
-  const hiddenCount = filtered.length - FILTER_INITIAL_VISIBLE_COUNT;
+  const visible = showAll
+    ? filtered
+    : filtered.slice(0, FILTER_INITIAL_VISIBLE_COUNT)
+  const hiddenCount = filtered.length - FILTER_INITIAL_VISIBLE_COUNT
 
   function toggle(brand: string) {
     onChange(
       selected.includes(brand)
         ? selected.filter((b) => b !== brand)
         : [...selected, brand]
-    );
+    )
   }
 
   return (
@@ -46,9 +48,11 @@ export default function BrandFilter({
         {visible.map((brand) => (
           <label
             key={brand}
+            htmlFor={`brand-${brand}`}
             className="flex items-center gap-2 text-sm cursor-pointer"
           >
             <Checkbox
+              id={`brand-${brand}`}
               checked={selected.includes(brand)}
               onCheckedChange={() => toggle(brand)}
             />
@@ -58,12 +62,13 @@ export default function BrandFilter({
       </div>
       {!search && hiddenCount > 0 && (
         <button
+          type="button"
           onClick={() => setShowAll(!showAll)}
           className="text-xs text-neutral-500 underline"
         >
-          {showAll ? "Show Less" : `See ${hiddenCount} More`}
+          {showAll ? 'Show Less' : `See ${hiddenCount} More`}
         </button>
       )}
     </div>
-  );
+  )
 }

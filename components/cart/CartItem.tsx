@@ -1,89 +1,93 @@
-"use client";
+'use client'
 
-import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { Trash2, Minus, Plus } from "lucide-react";
-import { useCartStore } from "@/stores/cart-store";
-import { CART_MAX_QUANTITY } from "@/lib/app.settings";
-import type { CartProduct } from "@/types/cart";
+import { Minus, Plus, Trash2 } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
+import { CART_MAX_QUANTITY } from '@/lib/app.settings'
+import { useCartStore } from '@/stores/cart-store'
+import type { CartProduct } from '@/types/cart'
 
 interface CartItemProps {
-  product: CartProduct;
+  product: CartProduct
 }
 
 export default function CartItem({ product }: CartItemProps) {
-  const updateQuantity = useCartStore((state) => state.updateQuantity);
-  const removeFromCart = useCartStore((state) => state.removeFromCart);
-  const [isUpdating, setIsUpdating] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-  const [inputValue, setInputValue] = useState(product.quantity.toString());
-  const inputRef = useRef<HTMLInputElement>(null);
+  const updateQuantity = useCartStore((state) => state.updateQuantity)
+  const removeFromCart = useCartStore((state) => state.removeFromCart)
+  const [isUpdating, setIsUpdating] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
+  const [inputValue, setInputValue] = useState(product.quantity.toString())
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (!isEditing) {
-      setInputValue(product.quantity.toString());
+      setInputValue(product.quantity.toString())
     }
-  }, [product.quantity, isEditing]);
+  }, [product.quantity, isEditing])
 
   const handleQuantityChange = async (newQuantity: number) => {
-    if (newQuantity < 1 || newQuantity > CART_MAX_QUANTITY) return;
-    if (newQuantity === product.quantity) return;
+    if (newQuantity < 1 || newQuantity > CART_MAX_QUANTITY) return
+    if (newQuantity === product.quantity) return
 
-    setIsUpdating(true);
+    setIsUpdating(true)
     try {
-      await updateQuantity(product.id, newQuantity);
-      setInputValue(newQuantity.toString());
+      await updateQuantity(product.id, newQuantity)
+      setInputValue(newQuantity.toString())
     } catch (error) {
-      console.error("Failed to update quantity:", error);
-      setInputValue(product.quantity.toString());
+      console.error('Failed to update quantity:', error)
+      setInputValue(product.quantity.toString())
     } finally {
-      setIsUpdating(false);
+      setIsUpdating(false)
     }
-  };
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (value === "" || /^\d+$/.test(value)) {
-      setInputValue(value);
+    const value = e.target.value
+    if (value === '' || /^\d+$/.test(value)) {
+      setInputValue(value)
     }
-  };
+  }
 
   const handleInputBlur = () => {
-    setIsEditing(false);
-    const newQuantity = parseInt(inputValue) || 1;
-    const clampedQuantity = Math.min(Math.max(newQuantity, 1), CART_MAX_QUANTITY);
-    handleQuantityChange(clampedQuantity);
-  };
+    setIsEditing(false)
+    const newQuantity = Number.parseInt(inputValue, 10) || 1
+    const clampedQuantity = Math.min(
+      Math.max(newQuantity, 1),
+      CART_MAX_QUANTITY
+    )
+    handleQuantityChange(clampedQuantity)
+  }
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      inputRef.current?.blur();
-    } else if (e.key === "Escape") {
-      setInputValue(product.quantity.toString());
-      setIsEditing(false);
+    if (e.key === 'Enter') {
+      inputRef.current?.blur()
+    } else if (e.key === 'Escape') {
+      setInputValue(product.quantity.toString())
+      setIsEditing(false)
     }
-  };
+  }
 
   const handleRemove = async () => {
     const confirmed = window.confirm(
       `Remove "${product.title}" from your cart?`
-    );
+    )
 
-    if (!confirmed) return;
+    if (!confirmed) return
 
-    setIsUpdating(true);
+    setIsUpdating(true)
     try {
-      await removeFromCart(product.id);
+      await removeFromCart(product.id)
     } catch (error) {
-      console.error("Failed to remove item:", error);
-      setIsUpdating(false);
+      console.error('Failed to remove item:', error)
+      setIsUpdating(false)
     }
-  };
+  }
 
-  const discountedTotal = product.discountedTotal ?? product.price * product.quantity;
-  const total = product.total ?? product.price * product.quantity;
-  const hasDiscount = product.discountPercentage > 0 && discountedTotal < total;
+  const discountedTotal =
+    product.discountedTotal ?? product.price * product.quantity
+  const total = product.total ?? product.price * product.quantity
+  const hasDiscount = product.discountPercentage > 0 && discountedTotal < total
 
   return (
     <div className="flex gap-4 p-4 border rounded-lg bg-white">
@@ -107,6 +111,7 @@ export default function CartItem({ product }: CartItemProps) {
         <div className="mt-2 flex items-center gap-4">
           <div className="flex items-center border rounded overflow-hidden">
             <button
+              type="button"
               onClick={() => handleQuantityChange(product.quantity - 1)}
               disabled={isUpdating || product.quantity <= 1}
               className="p-2 hover:bg-neutral-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
@@ -125,23 +130,24 @@ export default function CartItem({ product }: CartItemProps) {
                 onKeyDown={handleInputKeyDown}
                 disabled={isUpdating}
                 className="w-12 text-center text-sm font-medium border-0 focus:outline-none focus:ring-1 focus:ring-black disabled:opacity-50"
-                autoFocus
               />
             ) : (
               <button
+                type="button"
                 onClick={() => {
-                  setIsEditing(true);
-                  setInputValue(product.quantity.toString());
+                  setIsEditing(true)
+                  setInputValue(product.quantity.toString())
                 }}
                 disabled={isUpdating}
                 className="px-3 text-sm font-medium min-w-[2rem] text-center hover:bg-neutral-50 transition-colors disabled:opacity-50"
                 aria-label="Edit quantity"
               >
-                {isUpdating ? "..." : product.quantity}
+                {isUpdating ? '...' : product.quantity}
               </button>
             )}
 
             <button
+              type="button"
               onClick={() => handleQuantityChange(product.quantity + 1)}
               disabled={isUpdating || product.quantity >= CART_MAX_QUANTITY}
               className="p-2 hover:bg-neutral-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
@@ -152,6 +158,7 @@ export default function CartItem({ product }: CartItemProps) {
           </div>
 
           <button
+            type="button"
             onClick={handleRemove}
             disabled={isUpdating}
             className="text-neutral-500 hover:text-red-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
@@ -164,17 +171,30 @@ export default function CartItem({ product }: CartItemProps) {
 
       <div className="text-right flex-shrink-0">
         <div className="font-medium">
-          ${discountedTotal.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          $
+          {discountedTotal.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
         </div>
         {hasDiscount && (
           <div className="text-xs text-neutral-400 line-through mt-1">
-            ${total.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            $
+            {total.toLocaleString('en-US', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
           </div>
         )}
         <div className="text-xs text-neutral-500 mt-1">
-          ${product.price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} each
+          $
+          {product.price.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}{' '}
+          each
         </div>
       </div>
     </div>
-  );
+  )
 }

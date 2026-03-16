@@ -1,69 +1,70 @@
-"use client";
+'use client'
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useCartStore } from "@/stores/cart-store";
-import ShippingForm from "@/components/checkout/ShippingForm";
-import PaymentMethod from "@/components/checkout/PaymentMethod";
-import OrderSummary from "@/components/checkout/OrderSummary";
-import { Button } from "@/components/ui/button";
-import type { ShippingInfo, PaymentMethodType } from "@/types/checkout";
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import OrderSummary from '@/components/checkout/OrderSummary'
+import PaymentMethod from '@/components/checkout/PaymentMethod'
+import ShippingForm from '@/components/checkout/ShippingForm'
+import { Button } from '@/components/ui/button'
+import { useCartStore } from '@/stores/cart-store'
+import type { PaymentMethodType, ShippingInfo } from '@/types/checkout'
 
 export default function CheckoutForm() {
-  const router = useRouter();
-  const cart = useCartStore((state) => state.cart);
-  const isHydrated = useCartStore((state) => state.isHydrated);
-  const clearCart = useCartStore((state) => state.clearCart);
+  const router = useRouter()
+  const cart = useCartStore((state) => state.cart)
+  const isHydrated = useCartStore((state) => state.isHydrated)
+  const clearCart = useCartStore((state) => state.clearCart)
 
   const [shippingInfo, setShippingInfo] = useState<ShippingInfo>({
-    fullName: "",
-    email: "",
-    phone: "",
-    address: "",
-    city: "",
-    state: "",
-    zipCode: "",
-    country: "",
-  });
+    fullName: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    country: '',
+  })
 
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethodType>("cod");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState<Partial<ShippingInfo>>({});
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethodType>('cod')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errors, setErrors] = useState<Partial<ShippingInfo>>({})
 
   useEffect(() => {
     if (isHydrated && (!cart || cart.products.length === 0)) {
-      router.push("/cart");
+      router.push('/cart')
     }
-  }, [isHydrated, cart, router]);
+  }, [isHydrated, cart, router])
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<ShippingInfo> = {};
+    const newErrors: Partial<ShippingInfo> = {}
 
-    if (!shippingInfo.fullName.trim()) newErrors.fullName = "Full name is required";
+    if (!shippingInfo.fullName.trim())
+      newErrors.fullName = 'Full name is required'
     if (!shippingInfo.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = 'Email is required'
     } else if (!/\S+@\S+\.\S+/.test(shippingInfo.email)) {
-      newErrors.email = "Email is invalid";
+      newErrors.email = 'Email is invalid'
     }
-    if (!shippingInfo.phone.trim()) newErrors.phone = "Phone is required";
-    if (!shippingInfo.address.trim()) newErrors.address = "Address is required";
-    if (!shippingInfo.city.trim()) newErrors.city = "City is required";
-    if (!shippingInfo.state.trim()) newErrors.state = "State is required";
-    if (!shippingInfo.zipCode.trim()) newErrors.zipCode = "ZIP code is required";
-    if (!shippingInfo.country.trim()) newErrors.country = "Country is required";
+    if (!shippingInfo.phone.trim()) newErrors.phone = 'Phone is required'
+    if (!shippingInfo.address.trim()) newErrors.address = 'Address is required'
+    if (!shippingInfo.city.trim()) newErrors.city = 'City is required'
+    if (!shippingInfo.state.trim()) newErrors.state = 'State is required'
+    if (!shippingInfo.zipCode.trim()) newErrors.zipCode = 'ZIP code is required'
+    if (!shippingInfo.country.trim()) newErrors.country = 'Country is required'
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!validateForm()) {
-      return;
+      return
     }
 
-    setIsSubmitting(true);
+    setIsSubmitting(true)
 
     const order = {
       id: Date.now(),
@@ -72,26 +73,26 @@ export default function CheckoutForm() {
       cart,
       total: cart?.discountedTotal ?? 0,
       createdAt: new Date().toISOString(),
-    };
+    }
 
-    localStorage.setItem("lastOrder", JSON.stringify(order));
+    localStorage.setItem('lastOrder', JSON.stringify(order))
 
     setTimeout(() => {
-      clearCart();
-      router.push("/checkout/success");
-    }, 1000);
-  };
+      clearCart()
+      router.push('/checkout/success')
+    }, 1000)
+  }
 
   if (!isHydrated) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <p className="text-neutral-500">Loading...</p>
       </div>
-    );
+    )
   }
 
   if (!cart || cart.products.length === 0) {
-    return null;
+    return null
   }
 
   return (
@@ -118,10 +119,10 @@ export default function CheckoutForm() {
             disabled={isSubmitting}
             className="w-full mt-6 uppercase text-sm font-medium tracking-wide h-12"
           >
-            {isSubmitting ? "Processing..." : "Place Order"}
+            {isSubmitting ? 'Processing...' : 'Place Order'}
           </Button>
         </div>
       </div>
     </form>
-  );
+  )
 }

@@ -1,46 +1,48 @@
-import Link from "next/link";
-import type { Metadata } from "next";
-import { dummyjsonFetch } from "@/lib/dummyjson";
-import { PRODUCTS_PAGE_LIMIT, SITE_NAME } from "@/lib/app.settings";
-import type { ProductsResponse, ProductCategory } from "@/types/products";
-import CategoryPageClient from "./CategoryPageClient";
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { PRODUCTS_PAGE_LIMIT, SITE_NAME } from '@/lib/app.settings'
+import { dummyjsonFetch } from '@/lib/dummyjson'
+import type { ProductCategory, ProductsResponse } from '@/types/products'
+import CategoryPageClient from './CategoryPageClient'
 
 interface PageProps {
-  params: Promise<{ category: string }>;
+  params: Promise<{ category: string }>
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { category } = await params;
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { category } = await params
   try {
     const categories = await dummyjsonFetch<ProductCategory[]>(
-      "/products/categories"
-    );
-    const match = categories.find((c) => c.slug === category);
+      '/products/categories'
+    )
+    const match = categories.find((c) => c.slug === category)
     if (!match) {
-      return { title: "Category Not Found | Luna Store" };
+      return { title: 'Category Not Found | Luna Store' }
     }
     return {
       title: `${match.name} | ${SITE_NAME}`,
       description: `Browse our ${match.name} collection at ${SITE_NAME}.`,
-    };
+    }
   } catch {
-    return { title: "Category Not Found | Luna Store" };
+    return { title: 'Category Not Found | Luna Store' }
   }
 }
 
 export default async function CategoryPage({ params }: PageProps) {
-  const { category } = await params;
+  const { category } = await params
 
-  let categoriesData: ProductCategory[] = [];
+  let categoriesData: ProductCategory[] = []
   try {
     categoriesData = await dummyjsonFetch<ProductCategory[]>(
-      "/products/categories"
-    );
+      '/products/categories'
+    )
   } catch {
     // continue with empty categories
   }
 
-  const match = categoriesData.find((c) => c.slug === category);
+  const match = categoriesData.find((c) => c.slug === category)
 
   if (!match) {
     return (
@@ -49,11 +51,11 @@ export default async function CategoryPage({ params }: PageProps) {
           <Link href="/" className="hover:text-black transition-colors">
             Home
           </Link>
-          {" / "}
+          {' / '}
           <Link href="/category" className="hover:text-black transition-colors">
             Categories
           </Link>
-          {" / "}
+          {' / '}
           <span className="text-black">{category}</span>
         </nav>
 
@@ -73,32 +75,32 @@ export default async function CategoryPage({ params }: PageProps) {
           </Link>
         </div>
       </section>
-    );
+    )
   }
 
-  let productsData: ProductsResponse | null = null;
+  let productsData: ProductsResponse | null = null
   try {
     productsData = await dummyjsonFetch<ProductsResponse>(
       `/products/category/${category}`,
       { params: { limit: String(PRODUCTS_PAGE_LIMIT) } }
-    );
+    )
   } catch {
     // continue with no products
   }
 
-  const allProducts = productsData?.products ?? [];
+  const allProducts = productsData?.products ?? []
 
   const brands = Array.from(
     new Set(allProducts.map((p) => p.brand).filter(Boolean))
-  ).sort();
+  ).sort()
 
-  const prices = allProducts.map((p) => p.price);
-  const priceMin = prices.length > 0 ? Math.floor(Math.min(...prices)) : 0;
-  const priceMax = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 1000;
+  const prices = allProducts.map((p) => p.price)
+  const priceMin = prices.length > 0 ? Math.floor(Math.min(...prices)) : 0
+  const priceMax = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 1000
 
   const availabilityStatuses = Array.from(
     new Set(allProducts.map((p) => p.availabilityStatus).filter(Boolean))
-  ).sort();
+  ).sort()
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-10">
@@ -106,11 +108,11 @@ export default async function CategoryPage({ params }: PageProps) {
         <Link href="/" className="hover:text-black transition-colors">
           Home
         </Link>
-        {" / "}
+        {' / '}
         <Link href="/category" className="hover:text-black transition-colors">
           Categories
         </Link>
-        {" / "}
+        {' / '}
         <span className="text-black">{match.name}</span>
       </nav>
 
@@ -126,5 +128,5 @@ export default async function CategoryPage({ params }: PageProps) {
         availabilityStatuses={availabilityStatuses}
       />
     </section>
-  );
+  )
 }

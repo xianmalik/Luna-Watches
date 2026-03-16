@@ -1,9 +1,13 @@
-import Link from "next/link";
-import { Facebook, Instagram, Twitter } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-import { FOOTER_SECTIONS, SOCIAL_LINKS, SITE_NAME } from "@/lib/app.settings";
+import type { LucideIcon } from 'lucide-react'
+import { Facebook, Instagram, Twitter } from 'lucide-react'
+import Link from 'next/link'
+import { FOOTER_SECTIONS, SITE_NAME, SOCIAL_LINKS } from '@/lib/app.settings'
 
-const SOCIAL_ICONS: Record<string, LucideIcon> = { Facebook, Instagram, Twitter };
+const SOCIAL_ICONS: Record<string, LucideIcon> = {
+  Facebook,
+  Instagram,
+  Twitter,
+}
 
 export default function Footer() {
   return (
@@ -26,25 +30,30 @@ export default function Footer() {
           ))}
 
           <div>
-            <h3 className="text-lg font-semibold tracking-wide mb-4">CONNECT</h3>
+            <h3 className="text-lg font-semibold tracking-wide mb-4">
+              CONNECT
+            </h3>
             <div className="flex space-x-4 mb-6">
               {SOCIAL_LINKS.map((link) => {
-                const Icon = SOCIAL_ICONS[link.label];
+                const Icon = SOCIAL_ICONS[link.label]
                 return Icon ? (
                   <a key={link.label} href={link.href}>
                     <span className="sr-only">{link.label}</span>
                     <Icon />
                   </a>
-                ) : null;
+                ) : null
               })}
             </div>
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-gray-300 text-center text-sm">
-          <p>Copyright {new Date().getFullYear()} {SITE_NAME} | All Rights Reserved</p>
+          <p>
+            Copyright {new Date().getFullYear()} {SITE_NAME} | All Rights
+            Reserved
+          </p>
         </div>
       </div>
     </footer>
-  );
+  )
 }

@@ -1,56 +1,60 @@
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import type { Metadata } from "next";
-import { dummyjsonFetch } from "@/lib/dummyjson";
-import type { Product, ProductsResponse } from "@/types/products";
-import ProductImageGallery from "@/components/products/ProductImageGallery";
-import ProductActions from "@/components/products/ProductActions";
-import ProductSpecification from "@/blocks/ProductSpecification";
-import ProductShowcase from "@/blocks/ProductShowcase";
-import ProductsGrid from "@/blocks/ProductsGrid";
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import ProductShowcase from '@/blocks/ProductShowcase'
+import ProductSpecification from '@/blocks/ProductSpecification'
+import ProductsGrid from '@/blocks/ProductsGrid'
+import ProductActions from '@/components/products/ProductActions'
+import ProductImageGallery from '@/components/products/ProductImageGallery'
+import { dummyjsonFetch } from '@/lib/dummyjson'
+import type { Product, ProductsResponse } from '@/types/products'
 
 interface PageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string }>
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { id } = await params;
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { id } = await params
   try {
-    const product = await dummyjsonFetch<Product>(`/products/${id}`);
+    const product = await dummyjsonFetch<Product>(`/products/${id}`)
     return {
       title: `${product.title} | Luna Store`,
       description: product.description,
-    };
+    }
   } catch {
-    return { title: "Product Not Found | Luna Store" };
+    return { title: 'Product Not Found | Luna Store' }
   }
 }
 
 export default async function ProductDetailPage({ params }: PageProps) {
-  const { id } = await params;
+  const { id } = await params
 
-  let product: Product;
+  let product: Product
   try {
-    product = await dummyjsonFetch<Product>(`/products/${id}`);
+    product = await dummyjsonFetch<Product>(`/products/${id}`)
   } catch {
-    notFound();
+    notFound()
   }
 
-  let relatedProducts: Product[] = [];
+  let relatedProducts: Product[] = []
   try {
     const data = await dummyjsonFetch<ProductsResponse>(
       `/products/category/${product.category}`,
-      { params: { limit: "6" } }
-    );
-    relatedProducts = data.products.filter((p) => p.id !== product.id).slice(0, 5);
+      { params: { limit: '6' } }
+    )
+    relatedProducts = data.products
+      .filter((p) => p.id !== product.id)
+      .slice(0, 5)
   } catch {
     // ignore
   }
 
-  const hasDiscount = product.discountPercentage > 0;
+  const hasDiscount = product.discountPercentage > 0
   const discountedPrice = hasDiscount
     ? product.price * (1 - product.discountPercentage / 100)
-    : null;
+    : null
 
   return (
     <div className="container mx-auto max-w-screen-xl px-4 py-8">
@@ -59,11 +63,11 @@ export default async function ProductDetailPage({ params }: PageProps) {
         <Link href="/" className="hover:text-black transition-colors">
           Home
         </Link>
-        {" / "}
+        {' / '}
         <Link href="/products" className="hover:text-black transition-colors">
           Products
         </Link>
-        {" / "}
+        {' / '}
         <span className="text-black">{product.title}</span>
       </nav>
 
@@ -94,15 +98,27 @@ export default async function ProductDetailPage({ params }: PageProps) {
             {discountedPrice ? (
               <>
                 <span className="text-2xl font-medium">
-                  ${discountedPrice.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  $
+                  {discountedPrice.toLocaleString('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
                 </span>
                 <span className="text-lg text-neutral-400 line-through">
-                  ${product.price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  $
+                  {product.price.toLocaleString('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
                 </span>
               </>
             ) : (
               <span className="text-2xl font-medium">
-                ${product.price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                $
+                {product.price.toLocaleString('en-US', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
               </span>
             )}
           </div>
@@ -147,5 +163,5 @@ export default async function ProductDetailPage({ params }: PageProps) {
         <ProductsGrid title="You May Also Like" products={relatedProducts} />
       )}
     </div>
-  );
+  )
 }

@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
+import { Search } from 'lucide-react'
+import { Input } from '@/components/ui/input'
 
 export default function SearchBar() {
   return (
@@ -13,5 +13,5 @@ export default function SearchBar() {
         className="pl-10 h-10 bg-neutral-50 border-neutral-200 focus:bg-white transition-colors"
       />
     </div>
-  );
+  )
 }

@@ -1,13 +1,13 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { ChevronDown } from 'lucide-react'
+import { useState } from 'react'
+import { cn } from '@/lib/utils'
 
 interface FilterSectionProps {
-  title: string;
-  children: React.ReactNode;
-  defaultOpen?: boolean;
+  title: string
+  children: React.ReactNode
+  defaultOpen?: boolean
 }
 
 export default function FilterSection({
@@ -15,20 +15,21 @@ export default function FilterSection({
   children,
   defaultOpen = true,
 }: FilterSectionProps) {
-  const [open, setOpen] = useState(defaultOpen);
+  const [open, setOpen] = useState(defaultOpen)
 
   return (
     <div className="border-b border-neutral-200 py-4">
       <button
+        type="button"
         onClick={() => setOpen(!open)}
         className="flex w-full items-center justify-between text-xs font-semibold uppercase tracking-wider"
       >
         {title}
         <ChevronDown
-          className={cn("h-4 w-4 transition-transform", open && "rotate-180")}
+          className={cn('h-4 w-4 transition-transform', open && 'rotate-180')}
         />
       </button>
       {open && <div className="mt-4">{children}</div>}
     </div>
-  );
+  )
 }

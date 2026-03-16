@@ -1,30 +1,30 @@
-import { apiClient } from "@/lib/api-client";
+import { apiClient } from '@/lib/api-client'
 import type {
+  AddToCartRequest,
   Cart,
   CartsResponse,
-  AddToCartRequest,
   UpdateCartRequest,
-} from "@/types/cart";
+} from '@/types/cart'
 
 export async function getCarts(): Promise<CartsResponse> {
-  return apiClient<CartsResponse>("/cart");
+  return apiClient<CartsResponse>('/cart')
 }
 
 export async function getCartsByUser(userId: number): Promise<CartsResponse> {
-  return apiClient<CartsResponse>("/cart", {
+  return apiClient<CartsResponse>('/cart', {
     params: { userId: String(userId) },
-  });
+  })
 }
 
 export async function getCartById(id: number): Promise<Cart> {
-  return apiClient<Cart>(`/cart/${id}`);
+  return apiClient<Cart>(`/cart/${id}`)
 }
 
 export async function createCart(data: AddToCartRequest): Promise<Cart> {
-  return apiClient<Cart>("/cart", {
-    method: "POST",
+  return apiClient<Cart>('/cart', {
+    method: 'POST',
     body: data,
-  });
+  })
 }
 
 export async function updateCart(
@@ -32,13 +32,13 @@ export async function updateCart(
   data: UpdateCartRequest
 ): Promise<Cart> {
   return apiClient<Cart>(`/cart/${id}`, {
-    method: "PUT",
+    method: 'PUT',
     body: data,
-  });
+  })
 }
 
 export async function deleteCart(id: number): Promise<Cart> {
   return apiClient<Cart>(`/cart/${id}`, {
-    method: "DELETE",
-  });
+    method: 'DELETE',
+  })
 }

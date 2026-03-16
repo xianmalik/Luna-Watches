@@ -1,21 +1,21 @@
-"use client";
+'use client'
 
-import type { ProductFilters } from "./types";
-import FilterSection from "./FilterSection";
-import PriceFilter from "./modules/PriceFilter";
-import BrandFilter from "./modules/BrandFilter";
-import CategoryFilter from "./modules/CategoryFilter";
-import RatingFilter from "./modules/RatingFilter";
-import AvailabilityFilter from "./modules/AvailabilityFilter";
+import FilterSection from './FilterSection'
+import AvailabilityFilter from './modules/AvailabilityFilter'
+import BrandFilter from './modules/BrandFilter'
+import CategoryFilter from './modules/CategoryFilter'
+import PriceFilter from './modules/PriceFilter'
+import RatingFilter from './modules/RatingFilter'
+import type { ProductFilters } from './types'
 
 interface FilterSidebarProps {
-  filters: ProductFilters;
-  onFilterChange: (filters: ProductFilters) => void;
-  brands: string[];
-  categories: { slug: string; name: string; count: number }[];
-  priceMin: number;
-  priceMax: number;
-  availabilityStatuses: string[];
+  filters: ProductFilters
+  onFilterChange: (filters: ProductFilters) => void
+  brands: string[]
+  categories: { slug: string; name: string; count: number }[]
+  priceMin: number
+  priceMax: number
+  availabilityStatuses: string[]
 }
 
 export default function FilterSidebar({
@@ -28,7 +28,7 @@ export default function FilterSidebar({
   availabilityStatuses,
 }: FilterSidebarProps) {
   function update(partial: Partial<ProductFilters>) {
-    onFilterChange({ ...filters, ...partial });
+    onFilterChange({ ...filters, ...partial })
   }
 
   return (
@@ -73,5 +73,5 @@ export default function FilterSidebar({
         />
       </FilterSection>
     </aside>
-  );
+  )
 }

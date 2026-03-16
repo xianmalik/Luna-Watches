@@ -1,22 +1,22 @@
-"use client";
+'use client'
 
-import { SlidersHorizontal } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { SlidersHorizontal } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { SORT_OPTIONS } from "@/lib/app.settings";
+} from '@/components/ui/select'
+import { SORT_OPTIONS } from '@/lib/app.settings'
 
 interface FilterToolbarProps {
-  filtersVisible: boolean;
-  onToggleFilters: () => void;
-  sortValue: string;
-  onSortChange: (value: string) => void;
-  productCount: number;
+  filtersVisible: boolean
+  onToggleFilters: () => void
+  sortValue: string
+  onSortChange: (value: string) => void
+  productCount: number
 }
 
 export default function FilterToolbar({
@@ -35,7 +35,7 @@ export default function FilterToolbar({
         className="gap-2 text-xs uppercase tracking-wider font-medium"
       >
         <SlidersHorizontal className="h-4 w-4" />
-        {filtersVisible ? "Hide Filters" : "Show Filters"}
+        {filtersVisible ? 'Hide Filters' : 'Show Filters'}
       </Button>
 
       <div className="flex items-center gap-4">
@@ -57,5 +57,5 @@ export default function FilterToolbar({
         </span>
       </div>
     </div>
-  );
+  )
 }

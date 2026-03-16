@@ -1,20 +1,18 @@
-import Image from "next/image";
-import Link from "next/link";
-import type { Metadata } from "next";
-import { dummyjsonFetch } from "@/lib/dummyjson";
-import type { ProductCategory, ProductsResponse } from "@/types/products";
+import type { Metadata } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { dummyjsonFetch } from '@/lib/dummyjson'
+import type { ProductCategory, ProductsResponse } from '@/types/products'
 
 export const metadata: Metadata = {
-  title: "Categories | Luna Store",
-  description: "Browse all product categories at Luna Store.",
-};
+  title: 'Categories | Luna Store',
+  description: 'Browse all product categories at Luna Store.',
+}
 
 export default async function CategoriesPage() {
-  let categories: ProductCategory[] = [];
+  let categories: ProductCategory[] = []
   try {
-    categories = await dummyjsonFetch<ProductCategory[]>(
-      "/products/categories"
-    );
+    categories = await dummyjsonFetch<ProductCategory[]>('/products/categories')
   } catch {
     // continue with empty
   }
@@ -24,14 +22,14 @@ export default async function CategoriesPage() {
       try {
         const data = await dummyjsonFetch<ProductsResponse>(
           `/products/category/${cat.slug}`,
-          { params: { limit: "1", select: "thumbnail" } }
-        );
-        return data.products[0]?.thumbnail ?? null;
+          { params: { limit: '1', select: 'thumbnail' } }
+        )
+        return data.products[0]?.thumbnail ?? null
       } catch {
-        return null;
+        return null
       }
     })
-  );
+  )
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-10">
@@ -39,7 +37,7 @@ export default async function CategoriesPage() {
         <Link href="/" className="hover:text-black transition-colors">
           Home
         </Link>
-        {" / "}
+        {' / '}
         <span className="text-black">Categories</span>
       </nav>
 
@@ -73,11 +71,9 @@ export default async function CategoriesPage() {
         </div>
       ) : (
         <div className="flex items-center justify-center py-20">
-          <p className="text-sm text-neutral-500">
-            No categories available.
-          </p>
+          <p className="text-sm text-neutral-500">No categories available.</p>
         </div>
       )}
     </section>
-  );
+  )
 }

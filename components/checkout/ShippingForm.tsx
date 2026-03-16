@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import { Input } from "@/components/ui/input";
-import type { ShippingInfo } from "@/types/checkout";
+import { Input } from '@/components/ui/input'
+import type { ShippingInfo } from '@/types/checkout'
 
 interface ShippingFormProps {
-  shippingInfo: ShippingInfo;
-  setShippingInfo: (info: ShippingInfo) => void;
-  errors: Partial<ShippingInfo>;
+  shippingInfo: ShippingInfo
+  setShippingInfo: (info: ShippingInfo) => void
+  errors: Partial<ShippingInfo>
 }
 
 export default function ShippingForm({
@@ -15,8 +15,8 @@ export default function ShippingForm({
   errors,
 }: ShippingFormProps) {
   const handleChange = (field: keyof ShippingInfo, value: string) => {
-    setShippingInfo({ ...shippingInfo, [field]: value });
-  };
+    setShippingInfo({ ...shippingInfo, [field]: value })
+  }
 
   return (
     <div className="border rounded-lg p-6 bg-white">
@@ -33,8 +33,8 @@ export default function ShippingForm({
             id="fullName"
             type="text"
             value={shippingInfo.fullName}
-            onChange={(e) => handleChange("fullName", e.target.value)}
-            className={errors.fullName ? "border-red-500" : ""}
+            onChange={(e) => handleChange('fullName', e.target.value)}
+            className={errors.fullName ? 'border-red-500' : ''}
           />
           {errors.fullName && (
             <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>
@@ -50,8 +50,8 @@ export default function ShippingForm({
               id="email"
               type="email"
               value={shippingInfo.email}
-              onChange={(e) => handleChange("email", e.target.value)}
-              className={errors.email ? "border-red-500" : ""}
+              onChange={(e) => handleChange('email', e.target.value)}
+              className={errors.email ? 'border-red-500' : ''}
             />
             {errors.email && (
               <p className="text-red-500 text-xs mt-1">{errors.email}</p>
@@ -66,8 +66,8 @@ export default function ShippingForm({
               id="phone"
               type="tel"
               value={shippingInfo.phone}
-              onChange={(e) => handleChange("phone", e.target.value)}
-              className={errors.phone ? "border-red-500" : ""}
+              onChange={(e) => handleChange('phone', e.target.value)}
+              className={errors.phone ? 'border-red-500' : ''}
             />
             {errors.phone && (
               <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
@@ -83,8 +83,8 @@ export default function ShippingForm({
             id="address"
             type="text"
             value={shippingInfo.address}
-            onChange={(e) => handleChange("address", e.target.value)}
-            className={errors.address ? "border-red-500" : ""}
+            onChange={(e) => handleChange('address', e.target.value)}
+            className={errors.address ? 'border-red-500' : ''}
           />
           {errors.address && (
             <p className="text-red-500 text-xs mt-1">{errors.address}</p>
@@ -100,8 +100,8 @@ export default function ShippingForm({
               id="city"
               type="text"
               value={shippingInfo.city}
-              onChange={(e) => handleChange("city", e.target.value)}
-              className={errors.city ? "border-red-500" : ""}
+              onChange={(e) => handleChange('city', e.target.value)}
+              className={errors.city ? 'border-red-500' : ''}
             />
             {errors.city && (
               <p className="text-red-500 text-xs mt-1">{errors.city}</p>
@@ -116,8 +116,8 @@ export default function ShippingForm({
               id="state"
               type="text"
               value={shippingInfo.state}
-              onChange={(e) => handleChange("state", e.target.value)}
-              className={errors.state ? "border-red-500" : ""}
+              onChange={(e) => handleChange('state', e.target.value)}
+              className={errors.state ? 'border-red-500' : ''}
             />
             {errors.state && (
               <p className="text-red-500 text-xs mt-1">{errors.state}</p>
@@ -134,8 +134,8 @@ export default function ShippingForm({
               id="zipCode"
               type="text"
               value={shippingInfo.zipCode}
-              onChange={(e) => handleChange("zipCode", e.target.value)}
-              className={errors.zipCode ? "border-red-500" : ""}
+              onChange={(e) => handleChange('zipCode', e.target.value)}
+              className={errors.zipCode ? 'border-red-500' : ''}
             />
             {errors.zipCode && (
               <p className="text-red-500 text-xs mt-1">{errors.zipCode}</p>
@@ -150,8 +150,8 @@ export default function ShippingForm({
               id="country"
               type="text"
               value={shippingInfo.country}
-              onChange={(e) => handleChange("country", e.target.value)}
-              className={errors.country ? "border-red-500" : ""}
+              onChange={(e) => handleChange('country', e.target.value)}
+              className={errors.country ? 'border-red-500' : ''}
             />
             {errors.country && (
               <p className="text-red-500 text-xs mt-1">{errors.country}</p>
@@ -160,5 +160,5 @@ export default function ShippingForm({
         </div>
       </div>
     </div>
-  );
+  )
 }

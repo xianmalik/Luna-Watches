@@ -1,18 +1,18 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import type { Cart } from "@/types/cart";
+import Image from 'next/image'
+import type { Cart } from '@/types/cart'
 
 interface OrderSummaryProps {
-  cart: Cart;
+  cart: Cart
 }
 
 export default function OrderSummary({ cart }: OrderSummaryProps) {
-  const subtotal = cart.total ?? 0;
-  const discountedTotal = cart.discountedTotal ?? cart.total ?? 0;
-  const discount = subtotal - discountedTotal;
-  const shipping: number = 0;
-  const total = discountedTotal + shipping;
+  const subtotal = cart.total ?? 0
+  const discountedTotal = cart.discountedTotal ?? cart.total ?? 0
+  const discount = subtotal - discountedTotal
+  const shipping: number = 0
+  const total = discountedTotal + shipping
 
   return (
     <div className="border rounded-lg p-6 bg-white sticky top-4">
@@ -41,7 +41,10 @@ export default function OrderSummary({ cart }: OrderSummaryProps) {
               </p>
             </div>
             <div className="text-sm font-medium">
-              ${(product.discountedTotal ?? product.price * product.quantity).toFixed(2)}
+              $
+              {(
+                product.discountedTotal ?? product.price * product.quantity
+              ).toFixed(2)}
             </div>
           </div>
         ))}
@@ -63,7 +66,7 @@ export default function OrderSummary({ cart }: OrderSummaryProps) {
         <div className="flex justify-between">
           <span className="text-neutral-600">Shipping</span>
           <span className="font-medium">
-            {shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}
+            {shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}
           </span>
         </div>
 
@@ -73,5 +76,5 @@ export default function OrderSummary({ cart }: OrderSummaryProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,18 +1,18 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import type { Cart } from "@/types/cart";
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import type { Cart } from '@/types/cart'
 
 interface CartSummaryProps {
-  cart: Cart;
+  cart: Cart
 }
 
 export default function CartSummary({ cart }: CartSummaryProps) {
-  const subtotal = cart.total ?? 0;
-  const discountedTotal = cart.discountedTotal ?? cart.total ?? 0;
-  const discount = subtotal - discountedTotal;
-  const total = discountedTotal;
+  const subtotal = cart.total ?? 0
+  const discountedTotal = cart.discountedTotal ?? cart.total ?? 0
+  const discount = subtotal - discountedTotal
+  const total = discountedTotal
 
   return (
     <div className="border rounded-lg p-6 bg-white sticky top-4">
@@ -22,9 +22,15 @@ export default function CartSummary({ cart }: CartSummaryProps) {
 
       <div className="space-y-3 text-sm">
         <div className="flex justify-between">
-          <span className="text-neutral-600">Subtotal ({cart.totalProducts} items)</span>
+          <span className="text-neutral-600">
+            Subtotal ({cart.totalProducts} items)
+          </span>
           <span className="font-medium">
-            ${subtotal.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            $
+            {subtotal.toLocaleString('en-US', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
           </span>
         </div>
 
@@ -32,7 +38,11 @@ export default function CartSummary({ cart }: CartSummaryProps) {
           <div className="flex justify-between text-green-600">
             <span>Discount</span>
             <span className="font-medium">
-              -${discount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              -$
+              {discount.toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
             </span>
           </div>
         )}
@@ -45,7 +55,11 @@ export default function CartSummary({ cart }: CartSummaryProps) {
         <div className="border-t pt-3 flex justify-between text-base">
           <span className="font-semibold">Total</span>
           <span className="font-semibold">
-            ${total.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            $
+            {total.toLocaleString('en-US', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
           </span>
         </div>
       </div>
@@ -60,5 +74,5 @@ export default function CartSummary({ cart }: CartSummaryProps) {
         Taxes and shipping calculated at checkout
       </div>
     </div>
-  );
+  )
 }

@@ -1,45 +1,45 @@
-import { dummyjsonFetch } from "@/lib/dummyjson";
-import { PRODUCTS_PAGE_LIMIT, SITE_NAME } from "@/lib/app.settings";
-import type { ProductsResponse, ProductCategory } from "@/types/products";
-import ProductsPageClient from "./ProductsPageClient";
+import { PRODUCTS_PAGE_LIMIT, SITE_NAME } from '@/lib/app.settings'
+import { dummyjsonFetch } from '@/lib/dummyjson'
+import type { ProductCategory, ProductsResponse } from '@/types/products'
+import ProductsPageClient from './ProductsPageClient'
 
 export const metadata = {
   title: `All Products | ${SITE_NAME}`,
-  description: "Browse our full collection of products.",
-};
+  description: 'Browse our full collection of products.',
+}
 
 export default async function ProductsPage() {
   const [productsData, categoriesData] = await Promise.all([
-    dummyjsonFetch<ProductsResponse>("/products", {
+    dummyjsonFetch<ProductsResponse>('/products', {
       params: { limit: String(PRODUCTS_PAGE_LIMIT) },
     }),
-    dummyjsonFetch<ProductCategory[]>("/products/categories"),
-  ]);
+    dummyjsonFetch<ProductCategory[]>('/products/categories'),
+  ])
 
-  const allProducts = productsData.products;
+  const allProducts = productsData.products
 
   const brands = Array.from(
     new Set(allProducts.map((p) => p.brand).filter(Boolean))
-  ).sort();
+  ).sort()
 
-  const prices = allProducts.map((p) => p.price);
-  const priceMin = Math.floor(Math.min(...prices));
-  const priceMax = Math.ceil(Math.max(...prices));
+  const prices = allProducts.map((p) => p.price)
+  const priceMin = Math.floor(Math.min(...prices))
+  const priceMax = Math.ceil(Math.max(...prices))
 
-  const categoryCounts = new Map<string, number>();
+  const categoryCounts = new Map<string, number>()
   for (const p of allProducts) {
-    categoryCounts.set(p.category, (categoryCounts.get(p.category) ?? 0) + 1);
+    categoryCounts.set(p.category, (categoryCounts.get(p.category) ?? 0) + 1)
   }
 
   const categories = categoriesData.map((cat) => ({
     slug: cat.slug,
     name: cat.name,
     count: categoryCounts.get(cat.slug) ?? 0,
-  }));
+  }))
 
   const availabilityStatuses = Array.from(
     new Set(allProducts.map((p) => p.availabilityStatus).filter(Boolean))
-  ).sort();
+  ).sort()
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-10">
@@ -55,5 +55,5 @@ export default async function ProductsPage() {
         availabilityStatuses={availabilityStatuses}
       />
     </section>
-  );
+  )
 }

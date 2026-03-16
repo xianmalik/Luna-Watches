@@ -1,32 +1,32 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image'
+import Link from 'next/link'
 
 interface Collection {
-  title: string;
-  image: string;
-  href: string;
+  title: string
+  image: string
+  href: string
 }
 
 interface CollectionsGridProps {
-  title?: string;
-  collections?: Collection[];
+  title?: string
+  collections?: Collection[]
 }
 
 export default function CollectionsGrid({
   title,
   collections,
 }: CollectionsGridProps) {
-  if (!collections || collections.length === 0) return null;
+  if (!collections || collections.length === 0) return null
 
   return (
     <section className="container mx-auto max-w-screen-xl px-4 py-16">
       <h2 className="text-3xl font-bold mb-14 uppercase text-center tracking-wide">
-        {title ?? "Collections"}
+        {title ?? 'Collections'}
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {collections.map((collection, index) => (
+        {collections.map((collection) => (
           <Link
-            key={index}
+            key={collection.href}
             href={collection.href}
             className="group relative block aspect-square overflow-hidden rounded-md"
           >
@@ -45,5 +45,5 @@ export default function CollectionsGrid({
         ))}
       </div>
     </section>
-  );
+  )
 }

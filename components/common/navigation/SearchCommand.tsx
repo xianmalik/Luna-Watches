@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import { useEffect, useState, useCallback } from "react";
-import { useRouter } from "next/navigation";
-import { Search, Loader2 } from "lucide-react";
-import { SEARCH_DEBOUNCE_MS } from "@/lib/app.settings";
+import { Loader2, Search } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useCallback, useEffect, useState } from 'react'
+import { Button } from '@/components/ui/button'
 import {
   CommandDialog,
   CommandEmpty,
@@ -11,82 +11,84 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
-import { Button } from "@/components/ui/button";
-import type { Product } from "@/types/products";
+} from '@/components/ui/command'
+import { SEARCH_DEBOUNCE_MS } from '@/lib/app.settings'
+import type { Product } from '@/types/products'
 
 interface SearchCommandProps {
-  iconOnly?: boolean;
+  iconOnly?: boolean
 }
 
-export default function SearchCommand({ iconOnly = false }: SearchCommandProps) {
-  const router = useRouter();
-  const [open, setOpen] = useState(false);
-  const [query, setQuery] = useState("");
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isSearching, setIsSearching] = useState(false);
+export default function SearchCommand({
+  iconOnly = false,
+}: SearchCommandProps) {
+  const router = useRouter()
+  const [open, setOpen] = useState(false)
+  const [query, setQuery] = useState('')
+  const [products, setProducts] = useState<Product[]>([])
+  const [isSearching, setIsSearching] = useState(false)
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        setOpen((open) => !open);
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault()
+        setOpen((open) => !open)
       }
-    };
+    }
 
-    document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
-  }, []);
+    document.addEventListener('keydown', down)
+    return () => document.removeEventListener('keydown', down)
+  }, [])
 
   const searchProducts = useCallback(async (searchQuery: string) => {
     if (!searchQuery.trim()) {
-      setProducts([]);
-      return;
+      setProducts([])
+      return
     }
 
-    setIsSearching(true);
+    setIsSearching(true)
     try {
       const response = await fetch(
         `/api/products/search?q=${encodeURIComponent(searchQuery)}`
-      );
-      const data = await response.json();
-      setProducts(data.products || []);
+      )
+      const data = await response.json()
+      setProducts(data.products || [])
     } catch (error) {
-      console.error("Search error:", error);
-      setProducts([]);
+      console.error('Search error:', error)
+      setProducts([])
     } finally {
-      setIsSearching(false);
+      setIsSearching(false)
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      searchProducts(query);
-    }, SEARCH_DEBOUNCE_MS);
+      searchProducts(query)
+    }, SEARCH_DEBOUNCE_MS)
 
-    return () => clearTimeout(timer);
-  }, [query, searchProducts]);
+    return () => clearTimeout(timer)
+  }, [query, searchProducts])
 
   const handleSelect = (productId: number) => {
-    setOpen(false);
-    setQuery("");
-    setProducts([]);
-    router.push(`/products/${productId}`);
-  };
+    setOpen(false)
+    setQuery('')
+    setProducts([])
+    router.push(`/products/${productId}`)
+  }
 
   return (
     <>
       <Button
-        variant={iconOnly ? "ghost" : "outline"}
-        size={iconOnly ? "icon" : "default"}
+        variant={iconOnly ? 'ghost' : 'outline'}
+        size={iconOnly ? 'icon' : 'default'}
         className={
           iconOnly
-            ? "hover:bg-neutral-100"
-            : "relative w-full max-w-sm justify-start text-sm text-neutral-500 hover:text-neutral-900 h-10"
+            ? 'hover:bg-neutral-100'
+            : 'relative w-full max-w-sm justify-start text-sm text-neutral-500 hover:text-neutral-900 h-10'
         }
         onClick={() => setOpen(true)}
       >
-        <Search className={iconOnly ? "h-5 w-5" : "mr-2 h-4 w-4"} />
+        <Search className={iconOnly ? 'h-5 w-5' : 'mr-2 h-4 w-4'} />
         {!iconOnly && (
           <>
             <span>Search products...</span>
@@ -147,7 +149,7 @@ export default function SearchCommand({ iconOnly = false }: SearchCommandProps) 
             </CommandGroup>
           )}
 
-          {!query && !isSearching && (
+          {!(query || isSearching) && (
             <div className="py-6 text-center text-sm text-neutral-500">
               Start typing to search for products
             </div>
@@ -155,5 +157,5 @@ export default function SearchCommand({ iconOnly = false }: SearchCommandProps) 
         </CommandList>
       </CommandDialog>
     </>
-  );
+  )
 }

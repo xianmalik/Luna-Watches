@@ -125,7 +125,6 @@ body {
   }
 }
 
-
 /* navigation styles */
 .le-navbar--item a {
   @apply font-semibold text-secondary-foreground uppercase;

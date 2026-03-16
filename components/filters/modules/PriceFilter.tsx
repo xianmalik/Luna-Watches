@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import { Slider } from "@/components/ui/slider";
+import { Slider } from '@/components/ui/slider'
 
 interface PriceFilterProps {
-  min: number;
-  max: number;
-  value: [number, number];
-  onChange: (value: [number, number]) => void;
+  min: number
+  max: number
+  value: [number, number]
+  onChange: (value: [number, number]) => void
 }
 
 export default function PriceFilter({
@@ -29,5 +29,5 @@ export default function PriceFilter({
         <span>$ {value[1].toLocaleString()}</span>
       </div>
     </div>
-  );
+  )
 }

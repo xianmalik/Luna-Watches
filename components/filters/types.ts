@@ -1,11 +1,11 @@
 export interface ProductFilters {
-  priceRange: [number, number];
-  brands: string[];
-  categories: string[];
-  minRating: number;
-  availability: string[];
-  sortBy: string;
-  order: "asc" | "desc";
+  priceRange: [number, number]
+  brands: string[]
+  categories: string[]
+  minRating: number
+  availability: string[]
+  sortBy: string
+  order: 'asc' | 'desc'
 }
 
 export function createDefaultFilters(
@@ -18,7 +18,7 @@ export function createDefaultFilters(
     categories: [],
     minRating: 0,
     availability: [],
-    sortBy: "title",
-    order: "asc",
-  };
+    sortBy: 'title',
+    order: 'asc',
+  }
 }

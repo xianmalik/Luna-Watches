@@ -22,7 +22,11 @@
       "Bash(. \"$HOME/.nvm/nvm.sh\")",
       "Bash(nvm use:*)",
       "Bash(~/.bun/bin/bun run build)",
-      "Bash(node_modules/.bin/next build)"
+      "Bash(node_modules/.bin/next build)",
+      "Bash(node_modules/.bin/biome check .)",
+      "Bash(node_modules/.bin/biome check . --max-diagnostics=200)",
+      "Bash(node_modules/.bin/biome check --write .)",
+      "Bash(node_modules/.bin/biome check --write --unsafe .)"
     ],
     "deny": [],
     "ask": []

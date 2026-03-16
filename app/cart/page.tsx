@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import CartContent from "@/components/cart/CartContent";
+import type { Metadata } from 'next'
+import CartContent from '@/components/cart/CartContent'
 
 export const metadata: Metadata = {
-  title: "Shopping Cart | Luna Store",
-  description: "View and manage your shopping cart",
-};
+  title: 'Shopping Cart | Luna Store',
+  description: 'View and manage your shopping cart',
+}
 
 export default function CartPage() {
   return (
@@ -14,5 +14,5 @@ export default function CartPage() {
       </h1>
       <CartContent />
     </div>
-  );
+  )
 }

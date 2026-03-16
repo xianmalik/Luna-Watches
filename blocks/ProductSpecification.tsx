@@ -1,21 +1,21 @@
-"use client";
+'use client'
 
-import { ChevronDown } from "lucide-react";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { ChevronDown } from 'lucide-react'
+import { useState } from 'react'
+import { cn } from '@/lib/utils'
 
 interface ProductSpecificationProps {
-  weight?: number;
+  weight?: number
   dimensions?: {
-    width: number;
-    height: number;
-    depth: number;
-  };
-  warrantyInformation?: string;
-  shippingInformation?: string;
-  returnPolicy?: string;
-  minimumOrderQuantity?: number;
-  sku?: string;
+    width: number
+    height: number
+    depth: number
+  }
+  warrantyInformation?: string
+  shippingInformation?: string
+  returnPolicy?: string
+  minimumOrderQuantity?: number
+  sku?: string
 }
 
 export default function ProductSpecification({
@@ -27,34 +27,35 @@ export default function ProductSpecification({
   minimumOrderQuantity,
   sku,
 }: ProductSpecificationProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   const specs = [
-    sku ? { label: "SKU", value: sku } : null,
-    weight ? { label: "Weight", value: `${weight}g` } : null,
+    sku ? { label: 'SKU', value: sku } : null,
+    weight ? { label: 'Weight', value: `${weight}g` } : null,
     dimensions
       ? {
-          label: "Dimensions",
+          label: 'Dimensions',
           value: `${dimensions.width} × ${dimensions.height} × ${dimensions.depth} cm`,
         }
       : null,
     warrantyInformation
-      ? { label: "Warranty", value: warrantyInformation }
+      ? { label: 'Warranty', value: warrantyInformation }
       : null,
     shippingInformation
-      ? { label: "Shipping", value: shippingInformation }
+      ? { label: 'Shipping', value: shippingInformation }
       : null,
-    returnPolicy ? { label: "Return Policy", value: returnPolicy } : null,
+    returnPolicy ? { label: 'Return Policy', value: returnPolicy } : null,
     minimumOrderQuantity
-      ? { label: "Min. Order", value: String(minimumOrderQuantity) }
+      ? { label: 'Min. Order', value: String(minimumOrderQuantity) }
       : null,
-  ].filter(Boolean) as { label: string; value: string }[];
+  ].filter(Boolean) as { label: string; value: string }[]
 
-  if (specs.length === 0) return null;
+  if (specs.length === 0) return null
 
   return (
     <div className="border-t border-b border-neutral-200">
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center justify-between w-full py-5 text-left"
       >
@@ -63,8 +64,8 @@ export default function ProductSpecification({
         </h2>
         <ChevronDown
           className={cn(
-            "h-5 w-5 transition-transform duration-200",
-            isOpen && "rotate-180"
+            'h-5 w-5 transition-transform duration-200',
+            isOpen && 'rotate-180'
           )}
         />
       </button>
@@ -87,5 +88,5 @@ export default function ProductSpecification({
         </div>
       )}
     </div>
-  );
+  )
 }

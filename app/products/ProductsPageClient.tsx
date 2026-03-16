@@ -1,21 +1,21 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import type { Product } from "@/types/products";
-import type { ProductFilters } from "@/components/filters/types";
-import { createDefaultFilters } from "@/components/filters/types";
-import { useProductFilters } from "@/components/filters/useProductFilters";
-import FilterSidebar from "@/components/filters/FilterSidebar";
-import FilterToolbar from "@/components/filters/FilterToolbar";
-import ProductCard from "@/components/products/ProductCard";
+import { useState } from 'react'
+import FilterSidebar from '@/components/filters/FilterSidebar'
+import FilterToolbar from '@/components/filters/FilterToolbar'
+import type { ProductFilters } from '@/components/filters/types'
+import { createDefaultFilters } from '@/components/filters/types'
+import { useProductFilters } from '@/components/filters/useProductFilters'
+import ProductCard from '@/components/products/ProductCard'
+import type { Product } from '@/types/products'
 
 interface ProductsPageClientProps {
-  allProducts: Product[];
-  brands: string[];
-  categories: { slug: string; name: string; count: number }[];
-  priceMin: number;
-  priceMax: number;
-  availabilityStatuses: string[];
+  allProducts: Product[]
+  brands: string[]
+  categories: { slug: string; name: string; count: number }[]
+  priceMin: number
+  priceMax: number
+  availabilityStatuses: string[]
 }
 
 export default function ProductsPageClient({
@@ -28,16 +28,16 @@ export default function ProductsPageClient({
 }: ProductsPageClientProps) {
   const [filters, setFilters] = useState<ProductFilters>(() =>
     createDefaultFilters(priceMin, priceMax)
-  );
-  const [filtersVisible, setFiltersVisible] = useState(true);
+  )
+  const [filtersVisible, setFiltersVisible] = useState(true)
 
-  const filteredProducts = useProductFilters(allProducts, filters);
+  const filteredProducts = useProductFilters(allProducts, filters)
 
-  const sortValue = `${filters.sortBy}-${filters.order}`;
+  const sortValue = `${filters.sortBy}-${filters.order}`
 
   function handleSortChange(value: string) {
-    const [sortBy, order] = value.split("-") as [string, "asc" | "desc"];
-    setFilters((prev) => ({ ...prev, sortBy, order }));
+    const [sortBy, order] = value.split('-') as [string, 'asc' | 'desc']
+    setFilters((prev) => ({ ...prev, sortBy, order }))
   }
 
   return (
@@ -80,5 +80,5 @@ export default function ProductsPageClient({
         </div>
       </div>
     </div>
-  );
+  )
 }

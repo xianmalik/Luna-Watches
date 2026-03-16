@@ -1,20 +1,20 @@
-import { dummyjsonFetch } from "@/lib/dummyjson";
-import type { ProductsResponse } from "@/types/products";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from 'next/server'
+import { dummyjsonFetch } from '@/lib/dummyjson'
+import type { ProductsResponse } from '@/types/products'
 
 export async function GET(request: NextRequest) {
-  const { searchParams } = request.nextUrl;
-  const q = searchParams.get("q") ?? "";
+  const { searchParams } = request.nextUrl
+  const q = searchParams.get('q') ?? ''
 
   try {
-    const data = await dummyjsonFetch<ProductsResponse>("/products/search", {
+    const data = await dummyjsonFetch<ProductsResponse>('/products/search', {
       params: { q },
-    });
-    return NextResponse.json(data);
+    })
+    return NextResponse.json(data)
   } catch {
     return NextResponse.json(
-      { error: "Failed to search products" },
+      { error: 'Failed to search products' },
       { status: 500 }
-    );
+    )
   }
 }
