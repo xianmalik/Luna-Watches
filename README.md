@@ -1,22 +1,22 @@
 <p align="center">
-  <h2 align="center">Luna Store</h2>
+  <img src="./banner.jpg" width="100%" />
 </p>
 
 <p align="center">
-	E-Commerce Website Template powered by Next.JS
+	E-Commerce Website Template
 </p>
 
 <p align="center">
 	<a href="https://github.com/xianmalik/Luna-Watches/issues">
-		<img alt="Issues" src="https://img.shields.io/github/package-json/v/xianmalik/Luna-Watches?style=for-the-badge&logo=bilibili&color=F5E0DC&logoColor=D9E0EE&labelColor=302D41"></a>
+		<img alt="Issues" src="https://img.shields.io/github/package-json/v/xianmalik/Luna-Watches?style=for-the-badge&logo=bilibili&color=C8CB9A&logoColor=C8CB9A&labelColor=302D41"></a>
 	<a href="https://github.com/xianmalik/Luna-Watches">
-		<img alt="Repo Size" src="https://img.shields.io/github/repo-size/xianmalik/Luna-Watches?color=%23DDB6F2&label=SIZE&logo=codesandbox&style=for-the-badge&logoColor=D9E0EE&labelColor=302D41"/></a>
+		<img alt="Repo Size" src="https://img.shields.io/github/repo-size/xianmalik/Luna-Watches?color=%23C8CB9A&label=SIZE&logo=codesandbox&style=for-the-badge&logoColor=C8CB9A&labelColor=302D41"/></a>
 	<a href="https://github.com/xianmalik/Luna-Watches/stargazers">
-		<img alt="Stars" src="https://img.shields.io/github/stars/xianmalik/Luna-Watches?style=for-the-badge&logo=starship&color=C9CBFF&logoColor=D9E0EE&labelColor=302D41"></a>
+		<img alt="Stars" src="https://img.shields.io/github/stars/xianmalik/Luna-Watches?style=for-the-badge&logo=starship&color=C8CB9A&logoColor=C8CB9A&labelColor=302D41"></a>
 </p>
 
 <hr />
-
+<!-- 
 <p align="center">
 	<h2 align="center">Tech Stack</h2>
 </p>
@@ -28,7 +28,7 @@
 	<a href="https://bun.sh/"><img src="https://img.shields.io/badge/Bun-302D41?logo=bun&logoColor=fff&style=for-the-badge"/></a>
 	<a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-302D41?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC"/></a>
 	<a href="https://ui.shadcn.com/"><img src="https://img.shields.io/badge/shadcn%2Fui-302D41?logo=shadcnui&logoColor=fff&style=for-the-badge"/></a>
-</p>
+</p> -->
 
 <p align="center">
 	<!-- <a href="https://ui.shadcn.com/"><img src="https://img.shields.io/badge/TypeScript-302D41?logo=typescript&logoColor=3178C6&style=for-the-badge"/></a> -->
